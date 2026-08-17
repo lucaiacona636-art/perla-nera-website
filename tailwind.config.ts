@@ -37,12 +37,11 @@ const config: Config = {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-plex-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
-      spacing: {
-        "9": "96px",
-        "10": "128px",
-        "11": "160px",
-        "12": "192px",
-      },
+      // Nota: niente override delle chiavi numeriche 9-12 — Tailwind ha già
+      // 96/128/160/192px sotto le chiavi standard 24/32/40/48 (v. sotto:
+      // Documento 3 §3 "sp-9..sp-12" corrisponde a queste). Ridefinire 9-12
+      // qui aveva silenziosamente rotto ogni py-10/gap-9/mt-12 "normale"
+      // usato altrove nel codice per spaziature piccole.
       borderRadius: {
         sm: "2px",
         md: "4px",

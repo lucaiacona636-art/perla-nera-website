@@ -24,7 +24,7 @@ export function Section({
       id={id}
       className={cn(
         surface === "dark" ? "surface-dark" : "surface-light",
-        "py-9 lg:py-12",
+        "py-24 lg:py-48",
         className
       )}
     >

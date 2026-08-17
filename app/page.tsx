@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { WoodSwatch } from "@/components/ui/WoodSwatch";
+import { ProjectCard } from "@/components/ui/ProjectCard";
 import { HeroVisual } from "@/components/home/HeroVisual";
 import { categories } from "@/content/categories";
 import { essences } from "@/content/configurator/essences";
@@ -13,7 +14,7 @@ export default function HomePage() {
   return (
     <>
       {/* ---------------- HERO ---------------- */}
-      <section className="surface-dark relative overflow-hidden pt-40 pb-9 lg:pt-48 lg:pb-12 min-h-[92vh] flex flex-col justify-center">
+      <section className="surface-dark relative overflow-hidden pt-40 pb-24 lg:pt-48 lg:pb-48 min-h-[92vh] flex flex-col justify-center">
         <HeroVisual />
         <div className="container-page relative z-10">
           <Reveal>
@@ -85,7 +86,7 @@ export default function HomePage() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="text-xl">{category.label}</h3>
-                  {category.status !== "available" && (
+                  {category.status === "coming-soon" && (
                     <span className="eyebrow shrink-0 text-[10px] text-text-light-muted">In arrivo</span>
                   )}
                 </div>
@@ -235,27 +236,12 @@ export default function HomePage() {
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { title: "Tavolo ovale in noce", place: "Villa privata — Affi (VR)", tags: ["Noce", "Resina nera"] },
-            { title: "Tavolo rettangolare in rovere", place: "Residenza privata — Verona", tags: ["Rovere", "Bordo vivo"] },
-            { title: "Tavolo sagomato in ulivo", place: "Progetto Lago di Garda", tags: ["Ulivo", "Resina trasparente"] },
+            { title: "Tavolo ovale in noce", place: "Villa privata — Affi (VR)", tags: ["Noce", "Resina nera"], gradientFrom: "from-wood-noce" },
+            { title: "Tavolo rettangolare in rovere", place: "Residenza privata — Verona", tags: ["Rovere", "Bordo vivo"], gradientFrom: "from-wood-rovere" },
+            { title: "Tavolo sagomato in ulivo", place: "Progetto Lago di Garda", tags: ["Ulivo", "Resina trasparente"], gradientFrom: "from-wood-ulivo" },
           ].map((project, i) => (
             <Reveal key={project.title} delay={0.05 * i}>
-              <div className="border border-line-light bg-ivory-2">
-                <div className="aspect-[4/3] bg-gradient-to-br from-wood-noce to-ink-2" />
-                <div className="p-5">
-                  <p className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-text-light-muted">
-                    {project.place}
-                  </p>
-                  <p className="mt-2 font-display text-xl">{project.title}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="font-mono text-[10.5px] uppercase tracking-[0.06em] border border-line-light px-2.5 py-1 text-text-light-muted">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <ProjectCard {...project} />
             </Reveal>
           ))}
         </div>
