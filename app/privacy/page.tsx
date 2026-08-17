@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { business, NOT_CONFIGURED_LABEL } from "@/content/business";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -13,6 +14,7 @@ export default function PrivacyPage() {
     <>
       <section className="surface-dark pt-40 pb-24 lg:pt-48 lg:pb-48">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Privacy", href: "/privacy" }]} />
           <span className="eyebrow text-text-dark-muted">Informativa</span>
           <h1 className="mt-5 max-w-[20ch] text-4xl sm:text-5xl">Privacy</h1>
         </div>

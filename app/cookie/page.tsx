@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Cookie",
@@ -18,6 +19,7 @@ export default function CookiePage() {
     <>
       <section className="surface-dark pt-40 pb-24 lg:pt-48 lg:pb-48">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Cookie", href: "/cookie" }]} />
           <span className="eyebrow text-text-dark-muted">Informativa</span>
           <h1 className="mt-5 max-w-[20ch] text-4xl sm:text-5xl">Cookie</h1>
         </div>
