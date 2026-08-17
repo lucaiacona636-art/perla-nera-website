@@ -13,6 +13,7 @@ export interface BusinessInfo {
   address: { street: string | null; postalCode: string | null; city: string; region: string; country: string };
   email: string;
   phone: string | null;
+  /** Solo cifre con prefisso internazionale, es. "393776968657" — niente "+", spazi o trattini: è usato as-is in `https://wa.me/${whatsapp}` (app/contatti). */
   whatsapp: string | null;
   social: {
     instagram: string | null;

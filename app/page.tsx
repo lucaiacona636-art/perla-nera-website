@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { WoodSwatch } from "@/components/ui/WoodSwatch";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { TrackedLink } from "@/components/ui/TrackedLink";
 import { CinematicHero } from "@/components/home/CinematicHero";
 import { MaterialShowcase3D } from "@/components/home/MaterialShowcase3D";
 import { categories, getCategoryHref } from "@/content/categories";
@@ -348,7 +349,14 @@ export default function HomePage() {
           <div>
             <span className="eyebrow text-text-light-muted">Email</span>
             <p className="mt-4">
-              <a href={`mailto:${business.email}`} className="font-display text-xl underline">{business.email}</a>
+              <TrackedLink
+                href={`mailto:${business.email}`}
+                className="font-display text-xl underline"
+                event="contact_click"
+                eventParams={{ channel: "email", placement: "home" }}
+              >
+                {business.email}
+              </TrackedLink>
             </p>
           </div>
           <div>
