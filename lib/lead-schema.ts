@@ -13,7 +13,7 @@ export const leadContactSchema = z.object({
 });
 
 export const leadPayloadSchema = leadContactSchema.extend({
-  source: z.enum(["configurator", "richiesta-progetto"]),
+  source: z.enum(["configurator", "richiesta-progetto", "assistenza", "contatti"]),
   category: z.string().nullable().optional(),
   configuration: z.record(z.string(), z.unknown()).nullable().optional(),
   configurationSummaryText: z.string().optional(),

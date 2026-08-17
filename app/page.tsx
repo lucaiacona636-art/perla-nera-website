@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { WoodSwatch } from "@/components/ui/WoodSwatch";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { HeroVisual } from "@/components/home/HeroVisual";
-import { categories } from "@/content/categories";
+import { categories, getCategoryHref } from "@/content/categories";
 import { essences } from "@/content/configurator/essences";
 
 export default function HomePage() {
@@ -81,7 +81,7 @@ export default function HomePage() {
           {availableCategories.map((category, i) => (
             <Reveal key={category.id} delay={0.04 * i}>
               <Link
-                href="/collezione"
+                href={getCategoryHref(category)}
                 className="group block h-full border border-line-light bg-ivory-2 p-6 transition-colors hover:border-bronze"
               >
                 <div className="flex items-start justify-between gap-4">
@@ -92,7 +92,7 @@ export default function HomePage() {
                 </div>
                 <p className="mt-3 text-sm text-text-light-muted">{category.shortDescription}</p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-text-light border-b border-bronze pb-0.5 group-hover:gap-3 transition-all">
-                  {category.status === "available" ? "Scopri la collezione" : "Raccontaci cosa hai in mente"} →
+                  {category.status === "available" ? "Scopri la collezione" : category.id === "pezzi-scultorei" ? "Scopri Sculture & Opere" : "Raccontaci cosa hai in mente"} →
                 </span>
               </Link>
             </Reveal>

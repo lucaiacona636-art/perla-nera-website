@@ -16,6 +16,11 @@ export interface Table3DProps {
   finishRoughness: number;
   base: { baseColor: string; roughness: number; category: "acciaio" | "legno" | "custom" };
   autoRotate?: boolean;
+  /** Rif. mutabile 0→1 aggiornato da GSAP ScrollTrigger (Documento 8): se
+   * presente, la rotazione segue lo scroll invece di ruotare in autonomia —
+   * letto ogni frame senza passare da React, per non ricreare la scena a
+   * ogni scroll event. */
+  scrollProgress?: { current: number };
 }
 
 const CM_TO_M = 1 / 100;
@@ -30,6 +35,7 @@ export function Table3D({
   finishRoughness,
   base,
   autoRotate = true,
+  scrollProgress,
 }: Table3DProps) {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -49,7 +55,13 @@ export function Table3D({
   }, [essence.baseColor, essence.grainSeed]);
 
   useFrame((_, delta) => {
-    if (autoRotate && groupRef.current) {
+    if (!groupRef.current) return;
+    if (scrollProgress) {
+      // Rotazione cinematica legata allo scroll dell'hero (0 → ~130°),
+      // con un leggero smorzamento verso il valore target per restare fluida.
+      const target = scrollProgress.current * Math.PI * 0.72;
+      groupRef.current.rotation.y += (target - groupRef.current.rotation.y) * Math.min(delta * 4, 1);
+    } else if (autoRotate) {
       groupRef.current.rotation.y += delta * 0.12;
     }
   });

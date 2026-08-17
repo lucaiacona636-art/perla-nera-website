@@ -46,3 +46,11 @@ export const categories: ProductCategory[] = [
 export function getCategory(id: string): ProductCategory | undefined {
   return categories.find((c) => c.id === id);
 }
+
+// Alcune categorie hanno una pagina editoriale dedicata (es. Sculture &
+// Opere) invece del solo hub Collezione o del configuratore generico.
+export function getCategoryHref(category: ProductCategory): string {
+  if (category.id === "pezzi-scultorei") return "/sculture-e-opere";
+  if (category.status === "available") return "/collezione";
+  return "/progetta";
+}

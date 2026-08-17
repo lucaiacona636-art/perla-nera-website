@@ -35,5 +35,9 @@ export function LazyMount({ children, fallback = null, rootMargin = "200px" }: L
     return () => observer.disconnect();
   }, [visible, rootMargin]);
 
-  return <div ref={ref}>{visible ? children : fallback}</div>;
+  return (
+    <div ref={ref} className="h-full w-full">
+      {visible ? children : fallback}
+    </div>
+  );
 }

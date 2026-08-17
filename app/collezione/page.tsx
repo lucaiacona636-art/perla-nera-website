@@ -4,7 +4,7 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import { categories } from "@/content/categories";
+import { categories, getCategoryHref } from "@/content/categories";
 
 export const metadata: Metadata = {
   title: "Collezione",
@@ -50,7 +50,7 @@ export default function CollezionePage() {
           {categories.map((category, i) => (
             <Reveal key={category.id} delay={0.04 * i}>
               <Link
-                href={category.status === "available" ? "#tavoli" : "/progetta"}
+                href={category.status === "available" ? "#tavoli" : getCategoryHref(category)}
                 className="group block h-full border border-line-light bg-ivory-2 p-6 transition-colors hover:border-bronze"
               >
                 <div className="flex items-start justify-between gap-4">
@@ -61,7 +61,7 @@ export default function CollezionePage() {
                 </div>
                 <p className="mt-3 text-sm text-text-light-muted">{category.shortDescription}</p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-text-light border-b border-bronze pb-0.5 group-hover:gap-3 transition-all">
-                  {category.status === "available" ? "Sfoglia i progetti" : "Raccontaci cosa hai in mente"} →
+                  {category.status === "available" ? "Sfoglia i progetti" : category.id === "pezzi-scultorei" ? "Scopri Sculture & Opere" : "Raccontaci cosa hai in mente"} →
                 </span>
               </Link>
             </Reveal>
