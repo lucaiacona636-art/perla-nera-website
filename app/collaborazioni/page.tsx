@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Collaborazioni",
   description:
     "Perla Nera collabora con architetti, interior designer, studi di progettazione, ristoranti, hotel e attività: progettazione custom, campioni, produzione, installazione.",
+  alternates: { canonical: "/collaborazioni" },
 };
 
 const ragioni = [
@@ -23,6 +25,7 @@ export default function CollaborazioniPage() {
     <>
       <section className="surface-dark pt-40 pb-24 lg:pt-48 lg:pb-48">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Collaborazioni", href: "/collaborazioni" }]} />
           <Reveal>
             <span className="eyebrow text-text-dark-muted">Collaborazioni</span>
           </Reveal>

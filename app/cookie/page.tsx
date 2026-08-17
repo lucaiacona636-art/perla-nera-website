@@ -4,6 +4,7 @@ import { Section } from "@/components/layout/Section";
 export const metadata: Metadata = {
   title: "Cookie",
   description: "Informativa sui cookie utilizzati dal sito Perla Nera.",
+  alternates: { canonical: "/cookie" },
 };
 
 const cookieTable = [

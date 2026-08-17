@@ -4,12 +4,14 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { categories, getCategoryHref } from "@/content/categories";
 
 export const metadata: Metadata = {
   title: "Collezione",
   description:
     "Sfoglia la collezione Perla Nera per categoria: tavoli su misura, complementi d'arredo, oggetti di design, pezzi scultorei.",
+  alternates: { canonical: "/collezione" },
 };
 
 const tavoliProjects = [
@@ -27,6 +29,7 @@ export default function CollezionePage() {
       {/* ---------------- HERO ---------------- */}
       <section className="surface-dark pt-40 pb-24 lg:pt-48 lg:pb-48">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Collezione", href: "/collezione" }]} />
           <Reveal>
             <span className="eyebrow text-text-dark-muted">Collezione</span>
           </Reveal>

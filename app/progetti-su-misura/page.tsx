@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Progetti su misura",
   description:
     "Non scegli semplicemente un prodotto: lo costruiamo insieme. Il percorso di un progetto su misura Perla Nera, dall'idea alla consegna.",
+  alternates: { canonical: "/progetti-su-misura" },
 };
 
 const fasi = [
@@ -24,6 +26,7 @@ export default function ProgettiSuMisuraPage() {
     <>
       <section className="surface-dark pt-40 pb-24 lg:pt-48 lg:pb-48">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Progetti su misura", href: "/progetti-su-misura" }]} />
           <Reveal>
             <span className="eyebrow text-text-dark-muted">Progetti su misura</span>
           </Reveal>

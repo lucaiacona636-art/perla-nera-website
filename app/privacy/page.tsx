@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
+import { business, NOT_CONFIGURED_LABEL } from "@/content/business";
 
 export const metadata: Metadata = {
   title: "Privacy",
   description: "Informativa sul trattamento dei dati personali di Perla Nera.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -28,8 +30,8 @@ export default function PrivacyPage() {
           <div>
             <h2 className="text-2xl text-text-light">Titolare del trattamento</h2>
             <p className="mt-3">
-              [Ragione sociale] — [Indirizzo sede] — P.IVA [numero] — email:{" "}
-              <a href="mailto:info@perlanera.it" className="underline">info@perlanera.it</a>
+              {business.legalName ?? NOT_CONFIGURED_LABEL} — {business.address.street ?? NOT_CONFIGURED_LABEL}, {business.address.city} — P.IVA {business.vatNumber ?? NOT_CONFIGURED_LABEL} — email:{" "}
+              <a href={`mailto:${business.email}`} className="underline">{business.email}</a>
             </p>
           </div>
 
@@ -62,7 +64,7 @@ export default function PrivacyPage() {
               In qualsiasi momento puoi richiedere accesso, rettifica,
               cancellazione o limitazione del trattamento dei tuoi dati
               scrivendo a{" "}
-              <a href="mailto:info@perlanera.it" className="underline">info@perlanera.it</a>.
+              <a href={`mailto:${business.email}`} className="underline">{business.email}</a>.
             </p>
           </div>
 

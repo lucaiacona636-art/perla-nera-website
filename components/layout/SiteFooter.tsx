@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { business } from "@/content/business";
+import { trackEvent } from "@/lib/analytics";
 
 export function SiteFooter() {
   return (
@@ -35,9 +39,27 @@ export function SiteFooter() {
           <div>
             <p className="eyebrow text-text-dark-muted">Contatti</p>
             <ul className="mt-4 space-y-2.5 text-sm text-text-dark-muted">
-              <li>Verona, Italia</li>
-              <li><a className="hover:text-text-dark transition-colors" href="mailto:info@perlanera.it">info@perlanera.it</a></li>
-              <li><a className="hover:text-text-dark transition-colors" href="tel:+390000000000">+39 000 000 0000</a></li>
+              <li>{business.address.city}, Italia</li>
+              <li>
+                <a
+                  className="hover:text-text-dark transition-colors"
+                  href={`mailto:${business.email}`}
+                  onClick={() => trackEvent("contact_click", { channel: "email", placement: "footer" })}
+                >
+                  {business.email}
+                </a>
+              </li>
+              {business.phone && (
+                <li>
+                  <a
+                    className="hover:text-text-dark transition-colors"
+                    href={`tel:${business.phone}`}
+                    onClick={() => trackEvent("phone_click", { placement: "footer" })}
+                  >
+                    {business.phone}
+                  </a>
+                </li>
+              )}
               <li><Link className="hover:text-text-dark transition-colors" href="/contatti">Modulo di contatto →</Link></li>
             </ul>
           </div>

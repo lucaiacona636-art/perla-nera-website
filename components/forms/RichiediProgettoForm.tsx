@@ -9,6 +9,7 @@ import { leadContactSchema } from "@/lib/lead-schema";
 import { categories } from "@/content/categories";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 
@@ -88,6 +89,7 @@ export function RichiediProgettoForm() {
     <>
       <section className="surface-dark pt-40 pb-9 lg:pt-48 lg:pb-12">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Richiedi un progetto", href: "/richiedi-un-progetto" }]} />
           <Reveal>
             <span className="eyebrow text-text-dark-muted">Richiedi un progetto</span>
           </Reveal>

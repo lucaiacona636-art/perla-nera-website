@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Studio",
   description:
     "Chi siamo e come lavoriamo: uno studio italiano che progetta e realizza pezzi unici in legno massello e resina epossidica, a Verona.",
+  alternates: { canonical: "/studio" },
 };
 
 const values = [
@@ -30,6 +32,7 @@ export default function StudioPage() {
       {/* ---------------- HERO ---------------- */}
       <section className="surface-dark pt-40 pb-24 lg:pt-48 lg:pb-48">
         <div className="container-page">
+          <Breadcrumbs items={[{ label: "Studio", href: "/studio" }]} />
           <Reveal>
             <span className="eyebrow text-text-dark-muted">Studio</span>
           </Reveal>

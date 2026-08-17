@@ -101,6 +101,11 @@ export function AssistenzaForm() {
         <textarea rows={5} className={inputClass} placeholder="Manutenzione, un danno, una domanda sulla cura del pezzo — raccontaci il contesto." {...register("issueDescription")} />
       </Field>
 
+      <p className="text-xs text-text-light-muted">
+        Hai foto del pezzo o del problema da mostrarci? Scrivici direttamente a{" "}
+        <a href="mailto:info@perlanera.it" className="underline">info@perlanera.it</a> allegandole alla mail — ci aiutano a valutare la richiesta più velocemente.
+      </p>
+
       <label className="flex items-start gap-3 text-sm text-text-light-muted">
         <input type="checkbox" className="mt-1 accent-bronze" {...register("consent")} />
         <span>

@@ -53,7 +53,7 @@ function HeroMediaFill({ media: heroMedia }: { media: SiteMedia }) {
   return (
     <div className="absolute inset-0 h-full w-full bg-ink-2">
       <WoodSwatch baseColor={essence.material.baseColor} seed={essence.material.grainSeed ?? 1} className="opacity-60" />
-      <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.08em] text-text-dark-muted/80">
+      <span className="absolute bottom-4 left-4 hidden font-mono text-[10px] uppercase tracking-[0.08em] text-text-dark-muted/80 sm:block">
         {heroMedia.label} — placeholder temporaneo
       </span>
     </div>

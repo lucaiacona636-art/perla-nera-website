@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,6 +9,11 @@ import { CinematicHero } from "@/components/home/CinematicHero";
 import { MaterialShowcase3D } from "@/components/home/MaterialShowcase3D";
 import { categories, getCategoryHref } from "@/content/categories";
 import { essences } from "@/content/configurator/essences";
+import { business } from "@/content/business";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   const availableCategories = categories;
@@ -269,28 +275,44 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ---------------- 10. ARCHITETTI / INTERIOR DESIGNER ---------------- */}
+      {/* ---------------- 10. ARCHITETTI / INTERIOR DESIGNER + HOSPITALITY ---------------- */}
       <Section surface="light">
-        <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <Reveal>
-              <span className="eyebrow text-text-light-muted">Per professionisti</span>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <h2 className="mt-5 max-w-[20ch]">Lavoriamo anche al fianco di chi progetta per altri.</h2>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <p className="mt-4 max-w-[52ch] text-lg text-text-light-muted">
-                Architetti, interior designer, studi di progettazione: un
-                referente unico dal capitolato alla posa, campionature reali,
-                tempi di produzione comunicati in anticipo.
+        <Reveal>
+          <span className="eyebrow text-text-light-muted">Per professionisti</span>
+        </Reveal>
+        <Reveal delay={0.06}>
+          <h2 className="mt-5 max-w-[24ch]">Lavoriamo anche al fianco di chi progetta per altri.</h2>
+        </Reveal>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <Reveal delay={0.1}>
+            <div className="h-full border border-line-light bg-ivory-2 p-7">
+              <span className="eyebrow text-text-light-muted">Progettazione</span>
+              <p className="mt-4 font-display text-2xl">Architetti &amp; interior designer</p>
+              <p className="mt-4 text-text-light-muted">
+                Un referente unico dal capitolato alla posa, campionature
+                reali, tempi di produzione comunicati in anticipo.
               </p>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
           <Reveal delay={0.16}>
-            <Button href="/collaborazioni">Parliamo di una collaborazione</Button>
+            <div className="h-full border border-line-light bg-ivory-2 p-7">
+              <span className="eyebrow text-text-light-muted">Hospitality</span>
+              <p className="mt-4 font-display text-2xl">Ristoranti, hotel, locali, aziende</p>
+              <p className="mt-4 text-text-light-muted">
+                Forniture multiple mantenendo qualità e identità coerenti tra
+                i pezzi, per un ambiente che racconta un&rsquo;unica storia in
+                più punti.
+              </p>
+            </div>
           </Reveal>
         </div>
+
+        <Reveal delay={0.22}>
+          <div className="mt-8">
+            <Button href="/collaborazioni">Parliamo di una collaborazione</Button>
+          </div>
+        </Reveal>
       </Section>
 
       {/* ---------------- 11. CTA FINALE ---------------- */}
@@ -312,6 +334,29 @@ export default function HomePage() {
               <Button href="/richiedi-un-progetto" variant="secondary">Parliamo del tuo spazio</Button>
             </div>
           </Reveal>
+        </div>
+      </Section>
+
+      {/* ---------------- 12. CONTATTI ---------------- */}
+      <Section surface="light">
+        <div className="grid gap-9 sm:grid-cols-3">
+          <div>
+            <span className="eyebrow text-text-light-muted">Contatti</span>
+            <p className="mt-4 text-text-light-muted">Laboratorio</p>
+            <p className="font-display text-xl">{business.address.city}, Italia</p>
+          </div>
+          <div>
+            <span className="eyebrow text-text-light-muted">Email</span>
+            <p className="mt-4">
+              <a href={`mailto:${business.email}`} className="font-display text-xl underline">{business.email}</a>
+            </p>
+          </div>
+          <div>
+            <span className="eyebrow text-text-light-muted">Modulo</span>
+            <p className="mt-4">
+              <Link href="/contatti" className="font-display text-xl underline">Vai alla pagina Contatti →</Link>
+            </p>
+          </div>
         </div>
       </Section>
     </>

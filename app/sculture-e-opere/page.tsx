@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Sculture & Opere",
   description:
     "Opere in legno e resina dove la materia è il soggetto, non il supporto di una funzione: pezzi unici, installazioni, oggetti fuori dagli schemi.",
+  alternates: { canonical: "/sculture-e-opere" },
 };
 
 const direzioni = [
@@ -45,6 +47,7 @@ export default function SculturaEOperePage() {
           }}
         />
         <div className="container-page relative z-10">
+          <Breadcrumbs items={[{ label: "Sculture & Opere", href: "/sculture-e-opere" }]} />
           <Reveal>
             <span className="eyebrow text-text-dark-muted">Sculture &amp; Opere</span>
           </Reveal>
