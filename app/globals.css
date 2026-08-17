@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-ink text-text-dark font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-medium;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: theme(colors.bronze);
+    color: theme(colors.ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid theme(colors.bronze-hi);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Surface system — Documento 3 §1. Every section declares its surface;
+     tokens below resolve differently on dark vs light, never hardcoded per component. */
+  .surface-dark {
+    @apply bg-ink text-text-dark;
+  }
+  .surface-light {
+    @apply bg-ivory text-text-light;
+  }
+
+  .surface-dark .text-muted {
+    @apply text-text-dark-muted;
+  }
+  .surface-light .text-muted {
+    @apply text-text-light-muted;
+  }
+
+  .surface-dark .divide-surface {
+    @apply border-line-dark;
+  }
+  .surface-light .divide-surface {
+    @apply border-line-light;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.14em] inline-flex items-center gap-3;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-16;
+  }
+}
