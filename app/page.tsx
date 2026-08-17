@@ -27,8 +27,10 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 max-w-[54ch] text-lg text-text-dark-muted sm:text-xl">
-              Tavoli, complementi d&rsquo;arredo e pezzi unici in legno massello e resina,
-              progettati a mano attorno al tuo spazio. Verona, Lago di Garda, Nord Italia.
+              Legno massello e resina epossidica, lavorati a mano in pezzi
+              unici — tavoli, complementi d&rsquo;arredo, sculture e progetti
+              su misura, pensati attorno al tuo spazio. Verona, Lago di
+              Garda, Nord Italia.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
@@ -236,15 +238,22 @@ export default function HomePage() {
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { title: "Tavolo ovale in noce", place: "Villa privata — Affi (VR)", tags: ["Noce", "Resina nera"], gradientFrom: "from-wood-noce" },
-            { title: "Tavolo rettangolare in rovere", place: "Residenza privata — Verona", tags: ["Rovere", "Bordo vivo"], gradientFrom: "from-wood-rovere" },
-            { title: "Tavolo sagomato in ulivo", place: "Progetto Lago di Garda", tags: ["Ulivo", "Resina trasparente"], gradientFrom: "from-wood-ulivo" },
+            { title: "Tavolo ovale in noce", place: "Villa privata — Affi (VR)", tags: ["Noce", "Resina nera"], gradientFrom: "from-wood-noce", category: "Tavoli" },
+            { title: "Scultura verticale in rovere", place: "Progetto privato — Verona", tags: ["Rovere", "Pezzo unico"], gradientFrom: "from-wood-rovere", category: "Sculture & Opere" },
+            { title: "Consolle in ulivo", place: "Progetto Lago di Garda", tags: ["Ulivo", "Resina trasparente"], gradientFrom: "from-wood-ulivo", category: "Complementi d'arredo" },
           ].map((project, i) => (
             <Reveal key={project.title} delay={0.05 * i}>
               <ProjectCard {...project} />
             </Reveal>
           ))}
         </div>
+        <Reveal delay={0.2}>
+          <p className="mt-8 max-w-[56ch] text-sm text-text-light-muted">
+            Immagini rappresentative del tipo di lavoro, in attesa della
+            fotografia reale di ogni progetto — Tavoli è oggi la categoria
+            più matura, le altre crescono con lo stesso metodo.
+          </p>
+        </Reveal>
       </Section>
 
       {/* ---------------- CTA FINALE ---------------- */}

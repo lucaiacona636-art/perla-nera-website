@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { categories } from "@/content/categories";
+import { categories, getCategoryHref } from "@/content/categories";
 
 const primaryLinks = [
   { href: "/servizi", label: "Servizi" },
@@ -86,19 +86,21 @@ export function SiteHeader() {
                     transition={{ duration: 0.15 }}
                     className="absolute left-1/2 top-full mt-3 w-[340px] -translate-x-1/2 border border-line-dark bg-ink p-2"
                   >
-                    {categories.map((c) => (
-                      <Link
-                        key={c.id}
-                        href={c.status === "available" ? "/collezione" : "/progetta"}
-                        onClick={() => setCollezioneOpen(false)}
-                        className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-text-dark hover:bg-ink-2 transition-colors"
-                      >
-                        {c.label}
-                        {c.status === "coming-soon" && (
-                          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-text-dark-muted">In arrivo</span>
-                        )}
-                      </Link>
-                    ))}
+                    {categories
+                      .filter((c) => c.id !== "pezzi-scultorei")
+                      .map((c) => (
+                        <Link
+                          key={c.id}
+                          href={getCategoryHref(c)}
+                          onClick={() => setCollezioneOpen(false)}
+                          className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-text-dark hover:bg-ink-2 transition-colors"
+                        >
+                          {c.label}
+                          {c.status === "coming-soon" && (
+                            <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-text-dark-muted">In arrivo</span>
+                          )}
+                        </Link>
+                      ))}
                     <div className="mt-1 border-t border-line-dark pt-2">
                       <Link
                         href="/sculture-e-opere"
