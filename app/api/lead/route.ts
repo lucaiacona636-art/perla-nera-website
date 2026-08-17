@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { leadPayloadSchema } from "@/lib/lead-schema";
+import { notifyNewLead } from "@/lib/lead-notify";
 
-// MVP: valida e logga. Documento 10 §3 — in Fase 1 completa qui si aggancia
-// la scrittura su Postgres (Supabase/Neon) e l'email transazionale
-// (Resend); l'endpoint esiste già con lo shape di payload definitivo così
-// il frontend non cambia quando l'infrastruttura viene collegata.
+// Documento 10 §3 — riceve tutte le richieste (Configuratore, Richiedi un
+// progetto, Assistenza, Contatti) sotto un unico schema. Valida e logga
+// sempre (nessun lead va perso anche se l'email non è configurata), poi
+// prova a notificare lo studio via email/webhook — v. lib/lead-notify.ts
+// e .env.example per la configurazione richiesta.
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -24,7 +26,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  console.log("[lead]", JSON.stringify({ ...parsed.data, submittedAt: new Date().toISOString() }));
+  const record = { ...parsed.data, submittedAt: new Date().toISOString() };
 
-  return NextResponse.json({ ok: true });
+  // Il log resta la rete di sicurezza: la richiesta è comunque tracciata
+  // nei log del server anche se la consegna email fallisce o non è ancora
+  // configurata.
+  console.log("[lead]", JSON.stringify(record));
+
+  const result = await notifyNewLead(record);
+  if (!result.emailDelivered) {
+    console.warn("[lead] email non consegnata:", result.emailError);
+  }
+
+  return NextResponse.json({ ok: true, emailDelivered: result.emailDelivered });
 }
