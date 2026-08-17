@@ -21,8 +21,8 @@ Eventi custom GA4 (oltre agli automatici: `page_view`, `scroll`, `session_start`
 | Evento | Trigger | Parametri |
 |---|---|---|
 | `view_project` | Apertura card/pagina progetto in Collezione | `project_id`, `project_name` |
-| `start_configurator` | Primo step del configuratore aperto | `entry_point` (home/nav/progetto correlato) |
-| `configurator_step` | Completamento di uno step | `step_id`, `step_name`, `selection_id` |
+| `start_configurator` | Primo step del configuratore aperto | `entry_point` (home/nav/progetto correlato), `category_id` (Documento 7 §1 — quale categoria è stata scelta allo step 0) |
+| `configurator_step` | Completamento di uno step | `category_id`, `step_id`, `step_name`, `selection_id` |
 | `configurator_abandoned` | Uscita dal configuratore prima del riepilogo (su `beforeunload`/cambio route) | `last_step_id` |
 | `complete_configurator` | Arrivo alla schermata "Il tuo progetto" | `steps_completed_count` |
 | `submit_lead` | Invio riuscito di un form lead (configuratore, contatti, professionisti, hospitality, restauro) | `form_type`, `source_page` |

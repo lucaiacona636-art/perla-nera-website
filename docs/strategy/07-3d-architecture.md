@@ -6,8 +6,8 @@
 
 | Sezione | Uso del 3D | Funzione |
 |---|---|---|
-| Home — sezione "hero prodotto" | Un singolo tavolo flagship, modello 3D di alta qualità, rotazione controllata dallo scroll (non autoplay libero) | Narrativa: mostra la materia (venature, trasparenza resina) meglio di una foto statica, ancora prima del configuratore |
-| Configuratore | Preview live parametrica, consuma `SceneState` (Documento 7 §4) | Commerciale: è lo strumento di decisione, non uno show-off |
+| Home — sezione "hero prodotto" | Un singolo pezzo flagship (oggi: un tavolo, la categoria più matura — v. Documento 0 §1), modello 3D di alta qualità, rotazione controllata dallo scroll (non autoplay libero) | Narrativa: mostra la materia (venature, trasparenza resina) meglio di una foto statica, ancora prima del configuratore |
+| Configuratore | Preview live parametrica, consuma `SceneState` (Documento 7 §5) | Commerciale: è lo strumento di decisione, non uno show-off |
 | Case study (Fase 2, dove ha senso) | Viewer "gira intorno al pezzo" per i progetti più fotogenici | Narrativa/prova: sostituisce in parte il sopralluogo fisico |
 | Resto del sito (Chi Siamo, Processo, Servizi, liste, footer) | **Nessun 3D** | Il brief chiede funzione, non decorazione: qui bastano fotografia e motion 2D (Documento Design System + motion) |
 
@@ -27,7 +27,7 @@ Due percorsi distinti, scelti in base al caso d'uso:
 1. **Modello flagship (Home, Case study)** — realizzato una tantum da un 3D artist a partire da fotografie/misure reali del pezzo (o, se disponibile, photogrammetria di un pezzo esistente). Alta qualità, ottimizzato a mano, aggiornato raramente. Non è un processo automatizzato: è un asset curato come una fotografia professionale.
 2. **Modello parametrico (Configuratore)** — geometria costruita a runtime combinando: (a) mesh base per forma (`geometryId` nel catalogo, Documento 7) deformata/scalata secondo le dimensioni scelte; (b) materiali PBR intercambiabili per essenza/resina/finitura (texture map referenziate nel catalogo, non mesh separate). Questo evita di dover produrre un modello 3D per ogni combinazione possibile (essenza × forma × bordo × resina × finitura × gambe = centinaia di combinazioni) — si combinano un numero limitato di geometrie base con un numero limitato di set di materiali.
 
-Le gambe (`LegOption`) sono mesh separate, agganciate al piano tavolo via anchor point — cambiare gamba non richiede ricaricare l'intera scena.
+Le basi/gambe (`BaseOption`, Documento 7 §2) sono mesh separate, agganciate al pezzo via anchor point — cambiare base non richiede ricaricare l'intera scena. Questo pattern (geometria principale + componenti agganciati intercambiabili) è pensato per restare valido anche quando una categoria diversa dai tavoli avrà un proprio modello parametrico.
 
 ## 4. Performance — il 3D non deve rallentare il sito
 

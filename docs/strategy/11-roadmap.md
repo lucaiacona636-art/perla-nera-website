@@ -6,35 +6,35 @@
 
 Completata con questo documento: brand/direzione creativa, sitemap/IA, user journey, design system, content/copy, SEO, configuratore, 3D, analytics, performance, stack/CMS. Nessuna riga di codice applicativo prima di questo checkpoint, come richiesto.
 
-## Fase 1 — MVP curato (obiettivo: qualità prima di copertura)
+## Fase 1a — Sistema applicato (le 5 pagine che validano l'intero impianto)
 
-Ordine di costruzione consigliato — ogni step si appoggia sul precedente, evita di scrivere componenti "alla cieca" prima che il sistema sia stabile:
+> Aggiornata dopo la correzione di posizionamento (Documento 0 §1) e la richiesta esplicita di vedere il sistema applicato concretamente prima di espandere. Ordine di costruzione — ogni step si appoggia sul precedente:
 
-1. **Setup progetto**: Next.js + TypeScript + Tailwind configurato con i token del Documento 3 (colori, tipografia, spaziatura come CSS variables/Tailwind theme), font self-hosted, struttura cartelle (`app/`, `components/`, `content/`, `lib/`).
-2. **Component library di base**: `Button`, `Section` (dark/light), `SiteHeader`/`MobileMenu`, `SiteFooter`, tipografia (`Heading`, `Eyebrow`), `FormField` — costruiti e verificati isolatamente (storybook-like o pagina `/dev/components`) prima di comporre pagine reali, per garantire coerenza invece di ripetere stili pagina per pagina.
-3. **Home page** — la pagina più importante per la prima impressione: hero, manifesto, teaser sezioni (Documento 5 §2), CTA finale. Motion design (reveal, parallax leggero) applicato qui per primo e poi riusato.
-4. **Tavoli su misura** — hub prodotto con griglia progetti (versione ridotta della futura Collezione, Documento 1 §2).
-5. **Chi Siamo, Processo, Servizi** — pagine editoriali, riutilizzano interamente il component system già pronto: velocità di costruzione alta se gli step 1-2 sono solidi.
-6. **Contatti** — form + NAP + mappa; è anche il primo punto in cui si integra l'endpoint lead (Documento 10 §3), riusato poi dal configuratore.
-7. **Configuratore** — la funzionalità più complessa: store Zustand, cataloghi dati (Documento 6 §1), step UI, preview fallback fotografica **prima** del 3D (garantisce un configuratore funzionante anche se il 3D richiede più iterazioni).
-8. **Layer 3D** — flagship Home + preview live configuratore (Documento 8), integrato per ultimo e sempre lazy/opzionale rispetto a un sito già completo e funzionante senza di esso.
-9. **SEO tecnica di base**: metadata per ogni pagina MVP, sitemap.xml/robots.txt, schema `Organization`/`LocalBusiness`, Open Graph.
-10. **Analytics**: GTM + Consent Mode + eventi core (`start_configurator`, `submit_lead`, ecc.).
-11. **QA finale**: Lighthouse (Documento 9 §1), test e2e flusso configuratore→lead (Documento 10 §6), verifica accessibilità (Documento 3 §10), verifica responsive sulla matrice breakpoint (Documento 9 §5).
-12. **Lancio MVP** + Google Business Profile attivo in parallelo (Documento 6 §5) + Search Console verificata e sitemap sottomessa.
+1. **Setup progetto**: Next.js + TypeScript + Tailwind configurato con i token del Documento 3, font self-hosted, struttura cartelle (`app/`, `components/`, `content/`, `lib/`). `content/categories.ts` modella fin da subito le categorie del brand (Documento 0 §1, Documento 7 §1), non solo i tavoli.
+2. **Component library di base**: `Button`, `Section` (dark/light), `SiteHeader`/`MobileMenu`, `SiteFooter`, tipografia (`Heading`, `Eyebrow`), `FormField`, `CategoryCard` — costruiti e verificati isolatamente prima di comporre pagine reali.
+3. **Home** — hero, manifesto, teaser categorie (non solo tavoli), teaser configuratore, CTA finale. Motion design (reveal, parallax leggero) applicato qui per primo e poi riusato.
+4. **Studio** — chi siamo, filosofia, sguardo su materia e lavorazione: riutilizza il component system, testo scritto per lo studio nel suo insieme (Documento 5 §3).
+5. **Collezione** — hub categorie (Tavoli con contenuto reale, le altre "in arrivo" ma visibili, Documento 1 §2) + griglia progetti per la categoria Tavoli.
+6. **Configuratore** — la funzionalità più complessa: store Zustand con `categoryId` (Documento 7 §4), step 0 di selezione categoria, schema Tavoli completo, schema `free-brief` per le altre categorie, preview fallback fotografica **prima** del 3D.
+7. **Richiedi un progetto** — form standalone che riusa lo stesso endpoint/payload lead del configuratore (Documento 7 §6).
+8. **Layer 3D** — flagship Home + preview live configuratore (Documento 8), integrato per ultimo e sempre lazy/opzionale.
+9. **SEO tecnica di base** su queste 5 pagine: metadata, sitemap.xml/robots.txt, schema `Organization`/`LocalBusiness`, Open Graph.
+10. **Analytics**: GTM + Consent Mode + eventi core con `category_id` (Documento 9 §3).
+11. **QA**: Lighthouse (Documento 9 §1), test e2e flusso configuratore→lead, accessibilità (Documento 3 §10), matrice responsive (Documento 9 §5).
 
-## Fase 2 — Espansione (dopo validazione MVP con traffico/lead reali)
+## Fase 1b — Completamento MVP (subito dopo, stessa qualità)
+
+Pagine già previste in architettura (Documento 1 §3), costruite non appena la Fase 1a è stabile: Progetti/Case Study, Servizi (+ Progettazione su misura, Consegna e installazione, Cura e manutenzione), Processo, Materiali (Legni, Resina), Assistenza/FAQ, Contatti dedicata. Chiusura Fase 1 con Google Business Profile attivo, Search Console verificata, sitemap sottomessa.
+
+## Fase 2 — Espansione (dopo validazione con traffico/lead reali)
 
 Ordine indicativo, guidato dai dati raccolti in Fase 1 più che da un piano rigido:
 
 - Migrazione contenuti da content-as-code a **Sanity CMS** (Documento 10 §4).
-- **Collezione completa** + **Case study singoli** (richiede materiale fotografico/video accumulato nel frattempo).
-- **Legni** e **Resina** come hub dedicati con pagine per singola essenza/colore.
+- **Attivazione di una seconda categoria reale** (Complementi d'arredo o Oggetti di design, secondo quale genera più interesse negli eventi `start_configurator`/`category_id` — Documento 7 §8): primo catalogo, primi pezzi in Collezione, eventuale nuovo `ConfigurationSchema` che riusa gli step-type esistenti.
 - Pillar SEO (`/tavoli-legno-massello`, `/tavoli-legno-e-resina`, `/tavoli-resina-epossidica`) e primi articoli del **Giornale** (Documento 6 §3).
 - **Per Architetti e Interior Designer** e **Hospitality** come sezioni dedicate con form specifici (Documento 2 §3-4).
-- **Manutenzione e Restauro** come servizio strutturato (descrizione, processo, richiesta intervento con upload foto — stesso pattern tecnico del configuratore, Documento 7 §5).
 - **3D nei case study** più fotogenici (Documento 8 §1).
-- **FAQ** completa con schema dedicato per sezione.
 - Sincronizzazione lead → CRM esterno (HubSpot/Pipedrive) al posto della sola tabella `leads` MVP.
 
 ## Fase 3 — Predisposizione futura (solo architettura, non costruzione)

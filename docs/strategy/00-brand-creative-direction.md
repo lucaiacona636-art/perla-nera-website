@@ -4,25 +4,44 @@
 
 ## 1. Posizionamento
 
-**Perla Nera è un atelier artigianale italiano che progetta e realizza a mano tavoli e complementi d'arredo unici in legno massello e resina epossidica, su misura per lo spazio del cliente.**
+> **Nota di revisione**: la prima versione di questo documento posizionava Perla Nera come "atelier di tavoli". Corretto: i tavoli sono la categoria più matura, non il perimetro del brand. Il posizionamento corretto segue.
+
+**Perla Nera è uno studio italiano di artigianato e design che progetta e realizza pezzi unici in legno massello e resina epossidica — tavoli, complementi d'arredo, oggetti di design, pezzi scultorei e progetti speciali su misura.**
+
+Il brand non si definisce per *cosa* produce (un tipo di oggetto), ma per *come* lo produce: materia selezionata, tempo di lavorazione non compresso, unicità del risultato. Questo è ciò che rende il sistema estendibile — una nuova categoria (un'opera scultorea, un complemento mai fatto prima) non richiede un nuovo posizionamento, perché il posizionamento non è mai stato "chi fa tavoli".
 
 Tre parole guida per ogni decisione, di design o di copy:
 
-- **Materia** — il legno e la resina sono protagonisti, non sfondo.
+- **Materia** — il legno e la resina sono protagonisti, non sfondo. (Materiali futuri diversi da legno/resina restano compatibili con questo principio, se mai introdotti.)
 - **Tempo** — lavorazione artigianale, non produzione seriale.
-- **Unicità** — ogni pezzo è irripetibile, progettato per un luogo preciso.
+- **Unicità** — ogni pezzo è irripetibile, progettato per un luogo o una persona precisi.
+
+### Categorie del brand (sistema aperto, non elenco chiuso)
+
+I tavoli restano oggi la categoria con più prodotti, più prova sociale e più ricerca organica (Documento 6-SEO) — è quindi normale che compaiano con più peso nell'MVP. Ma l'architettura (sitemap, configuratore, content model) tratta ogni categoria come **applicazione dello stesso studio**, mai come un sito satellite:
+
+| Categoria | Stato in MVP |
+|---|---|
+| Tavoli | Categoria completa: collezione, configuratore, materiali dedicati |
+| Complementi d'arredo | Presente nell'architettura (Collezione, cataloghi), contenuto in crescita |
+| Oggetti di design | Presente nell'architettura, "in arrivo" finché non c'è un primo pezzo reale |
+| Pezzi scultorei / opere | Presente nell'architettura, "in arrivo" |
+| Progetti speciali su misura | Sempre disponibile fin da subito — è per definizione la categoria "senza schema fisso": si accede via configuratore con un percorso libero (brief + riferimenti), non via catalogo di opzioni (Documento 6 §1) |
+
+Una categoria "in arrivo" è comunque visibile in navigazione (non nascosta) — comunica ampiezza dello studio anche prima di avere il primo pezzo fotografato, senza mai promettere un catalogo di opzioni che non esiste ancora.
 
 ### Frame competitivo
 
 | Non siamo | Siamo |
 |---|---|
-| Falegnameria di quartiere | Atelier di progettazione e produzione |
-| E-commerce di arredo | Studio che realizza pezzi su commissione |
+| Falegnameria di quartiere | Studio di progettazione e produzione |
+| Negozio di tavoli online | Studio che realizza pezzi su commissione, su più categorie |
 | Catalogo industriale | Collezione curata + progetti custom |
 | Sito-vetrina statico | Esperienza che fa percepire la materia |
 | Brand "artigianale rustico" | Artigianato italiano **contemporaneo** |
+| "Il sito dei tavoli in resina" | Uno studio di materia e lavorazione, di cui i tavoli sono l'espressione più conosciuta |
 
-Il rischio principale da evitare non è "sembrare troppo semplice", è **sembrare un template**. Ogni pattern visivo troppo comune nei siti "luxury AI-generated" (oro lucido, Playfair Display ovunque, glass-morphism, hero con overlay scuro su foto stock) va evitato di proposito. Le scelte di design successive (tipografia, colore, motion) sono fatte per differenziarsi esplicitamente da quel linguaggio.
+Il rischio principale da evitare non è "sembrare troppo semplice", è **sembrare un template** — e, dopo questa correzione, anche **sembrare un e-commerce verticale su un solo prodotto**. Ogni pattern visivo troppo comune nei siti "luxury AI-generated" (oro lucido, Playfair Display ovunque, glass-morphism, hero con overlay scuro su foto stock) va evitato di proposito. Le scelte di design successive (tipografia, colore, motion) sono fatte per differenziarsi esplicitamente da quel linguaggio.
 
 ## 2. Target primari
 

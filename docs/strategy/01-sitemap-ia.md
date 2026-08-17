@@ -1,110 +1,108 @@
 # Sitemap & Architettura dell'Informazione
 
 > Documento 2 di 12. Definisce tutte le pagine del sito, la loro priorità (MVP vs Fase 2/3), gli URL e la struttura di navigazione.
+>
+> **Nota di revisione**: la versione precedente organizzava il sito intorno ai tavoli come prodotto centrale. Corretto — v. Documento 0 §1: Perla Nera è uno studio di artigianato e design, i tavoli sono una categoria (oggi la più matura), non il perimetro del brand. La sitemap sotto riflette un'architettura **per categoria di pezzo**, pensata per restare valida quando tra un anno si aggiunge una categoria che oggi non esiste.
 
 ## 1. Principio di struttura
 
-Architettura **hub & spoke a doppio livello**, pensata per SEO topicale e per i tre pubblici (privati, professionisti, hospitality):
+Architettura **hub & spoke a tre assi**, non più a due:
 
-- **Hub di prodotto**: Legni, Resina, Tavoli su Misura → alimentano il Configuratore e le pagine dedicate a keyword cluster.
-- **Hub di prova**: Collezione/Progetti → Case Study singoli → alimentano fiducia e SEO locale/referenziale.
-- **Hub di servizio**: Servizi → Manutenzione e Restauro, Per Architetti, Per Hospitality → percorsi di conversione dedicati per pubblico.
-- **Hub editoriale**: Blog/Giornale → alimenta topical authority e intercetta ricerche informative (parte alta del funnel).
+- **Asse categoria** (*cosa realizziamo*): Collezione → categorie (Tavoli, Complementi d'arredo, Oggetti di design, Pezzi scultorei/Opere, Progetti speciali) → singolo pezzo/prodotto. Ogni categoria è un record dati (Documento 6 §1 aggiornato), non una sezione scritta a mano — aggiungerne una nuova è un'operazione di contenuto, mai di ristrutturazione del sito.
+- **Asse progetto** (*cosa abbiamo realizzato*): Progetti/Case Study → singolo progetto, che può attraversare più categorie (es. un progetto hospitality con tavoli **e** complementi d'arredo nello stesso ambiente). Distinto dall'asse categoria perché risponde a una domanda diversa: non "che tipo di pezzo cerco" ma "cosa avete già fatto per un caso come il mio".
+- **Asse servizio** (*come lavoriamo*): Studio, Processo, Materiali, Servizi (con le sotto-pagine Progettazione su misura, Consegna e installazione, Cura e manutenzione) → funzionale a tutte le categorie contemporaneamente, mai scritto pensando solo ai tavoli.
 
-Rispetto al brief aggiungo alcune pagine (segnalate `[proposta]`) motivate da SEO/UX/conversione; nessuna pagina "spam" per singola città — la local SEO si gestisce con **una** pagina di area servita ben fatta + schema markup, non con doppioni per ogni comune (v. documento SEO §5).
+Il Configuratore (Documento 6-7, aggiornati) è il punto di convergenza dei tre assi: si entra scegliendo una categoria (asse 1), ispirandosi eventualmente a un progetto reale (asse 2), e si esce con una richiesta gestita secondo lo stesso servizio (asse 3) qualunque sia la categoria.
 
-## 2. Sitemap — MVP (Fase 1)
+## 2. Sitemap — pagine da costruire ora
 
-Le 7 pagine da costruire per prime, curate al massimo livello:
+Le 5 pagine indicate come priorità per validare il sistema end-to-end, costruite con la massima cura prima di espandere:
 
 ```
 /                                  Home
-/tavoli-su-misura                  Tavoli su Misura (hub prodotto)
-/configura-il-tuo-tavolo           Configuratore ("Crea il tuo tavolo")
-/chi-siamo                         Chi Siamo (brand, atelier, persone)
-/processo                          Il Processo artigianale
-/servizi                           Servizi (panoramica, con anchor/link a Fase 2)
-/contatti                          Contatti (form + mappa + NAP)
+/collezione                        Collezione — hub categorie (Tavoli con contenuto reale;
+                                    Complementi, Oggetti di design, Pezzi scultorei presenti in
+                                    navigazione come "In arrivo"; Progetti speciali sempre attiva)
+/progetta                          Configuratore — "Progetta il tuo pezzo": step 0 scelta
+                                    categoria, poi flusso specifico (Documento 6 §2)
+/studio                            Studio — chi siamo, filosofia, il nostro sguardo su materia
+                                    e lavorazione (non solo "processo tavoli")
+/richiedi-un-progetto              Richiesta progetto — form diretto, alternativa leggera al
+                                    configuratore per chi ha già le idee chiare o una categoria
+                                    non ancora configurabile (es. pezzo scultoreo)
 ```
 
-Pagine tecniche obbligatorie anche in MVP (non negoziabili per SEO/legale, basso sforzo):
+Pagine tecniche obbligatorie anche ora (basso sforzo, non negoziabili):
 ```
-/privacy
-/cookie
-/404
-/sitemap.xml, /robots.txt          (file tecnici, non pagine di navigazione)
+/privacy   /cookie   /404   /sitemap.xml   /robots.txt
 ```
 
-> Nota: **Collezione/Progetti** viene anticipata in forma ridotta *dentro* `/tavoli-su-misura` in MVP (griglia di 6-8 progetti con foto, senza pagine dedicate per singolo case study). Le pagine Case Study singole partono in Fase 2 quando c'è materiale fotografico sufficiente per farle bene — pubblicarle vuote danneggerebbe la percezione di qualità più che aiutare la SEO.
+> `/contatti` in questa fase è un **anchor/sezione**, non ancora una pagina propria (NAP + form breve raggiungibile da header/footer di ogni pagina) — diventa pagina dedicata in Fase 1b insieme al resto (§3) senza cambiare nulla nell'impianto.
 
-## 3. Sitemap completa — Fase 2 (espansione)
+## 3. Sitemap — Fase 1b (subito dopo, stessa qualità, non "fase lontana")
 
-```
-/collezione                        Collezione / Progetti (galleria completa)
-/collezione/[slug-progetto]        Case Study singolo (es. /collezione/villa-affi-tavolo-noce)
-
-/legni                             Hub Legni (le essenze)
-/legni/[essenza]                   Pagina essenza singola: noce, rovere, olmo, ulivo
-
-/resina                            Hub Resina epossidica
-/resina/[colore]                   Pagina colore/tipologia resina: trasparente, nera, ...
-
-/tavoli-legno-massello              [proposta] Pillar SEO — intento "tavoli in legno massello"
-/tavoli-legno-e-resina              [proposta] Pillar SEO — intento "tavoli in legno e resina"
-/tavoli-resina-epossidica           [proposta] Pillar SEO — intento "tavoli in resina epossidica"
-/complementi-arredo                 Complementi d'arredo (panche, consolle, credenze, specchi)
-
-/servizi/manutenzione-e-restauro    Manutenzione e Restauro (servizio con richiesta intervento)
-/servizi/progettazione-personalizzata
-/servizi/complementi-arredo
-
-/per-architetti-e-interior-designer  Sezione professionale B2B
-/hospitality                         Sezione ristoranti/hotel/locali/aziende
-
-/faq                                 FAQ generali (+ FAQ per sezione con schema dedicato)
-/giornale                            Blog / editoriale (indice)
-/giornale/[slug-articolo]            Articolo singolo
-/atelier                            [proposta] Showroom/laboratorio, indirizzo, visita su appuntamento — rafforza E-E-A-T e local SEO
-/note-legali                        [proposta] Termini, garanzie, condizioni di vendita/preventivo
-```
-
-## 4. Sitemap — Fase 3 (predisposizione futura, non da costruire ora)
-
-Solo architettura/placeholder, nessuna pagina reale in questa fase:
+Pagine già previste in architettura (routing, content model, nav) fin da ora, popolate con contenuto reale appena disponibile:
 
 ```
-/account                            Area cliente (stato ordine/progetto) — richiede CRM
-/negozio                            E-commerce complementi pronti (pezzi non custom)
-/[locale]/...                       Internazionalizzazione (EN) se il mercato lo richiede
-/preventivo/[id]                    Pagina preventivo condivisibile (link inviato al cliente dal CRM)
+/progetti                          Progetti / Case Study — indice
+/progetti/[slug-progetto]          Case study singolo (può referenziare più categorie)
+
+/servizi                            Servizi / Cosa facciamo — hub
+/servizi/progettazione-su-misura
+/servizi/consegna-e-installazione
+/servizi/cura-e-manutenzione        (include restauro, riverniciatura, lucidatura — Documento 5 §6)
+
+/processo                           Processo di lavorazione — dal materiale al pezzo finito,
+                                     scritto per essere vero per qualunque categoria (varianti
+                                     per categoria dove necessario, non pagine duplicate)
+/materiali                          Materiali — hub: legni, resina, [materiali futuri]
+/materiali/legni                    /materiali/legni/[essenza]  (noce, rovere, olmo, ulivo, ...)
+/materiali/resina                   /materiali/resina/[colore]
+
+/assistenza                         Assistenza / FAQ
+/contatti                           Contatti (promossa da anchor a pagina dedicata)
 ```
 
-## 5. Struttura di navigazione
+## 4. Sitemap — Fase 2 (espansione)
+
+```
+/collezione/complementi-arredo      Categoria attivata con contenuto reale
+/collezione/oggetti-di-design       Categoria attivata con contenuto reale
+/collezione/pezzi-scultorei         Categoria attivata con contenuto reale
+
+/per-architetti-e-interior-designer
+/hospitality
+
+/giornale                           Blog / editoriale — indice
+/giornale/[slug-articolo]
+
+/atelier                            Showroom/laboratorio, visita su appuntamento
+/note-legali
+```
+
+Attivare una categoria di Fase 2 significa: aggiungere il record categoria (Documento 6 §1), i primi pezzi in Collezione, ed eventualmente uno schema di configurazione dedicato — mai riscrivere il configuratore o la sitemap.
+
+## 5. Sitemap — Fase 3 (predisposizione futura, non da costruire ora)
+
+Invariata rispetto alla versione precedente: `/account`, `/negozio`, `/[locale]/...`, `/preventivo/[id]` — l'architettura a categorie rende anzi più naturale un futuro `/negozio` (pezzi pronti, non custom) perché "categoria" e "prodotto" sono già modellati come entità distinte da subito.
+
+## 6. Struttura di navigazione
 
 ### Header (desktop)
 ```
-[Logo Perla Nera]   Tavoli su Misura   Collezione   Processo   Legni & Resina   Servizi   Chi Siamo   Contatti   [CTA: Progetta il tuo tavolo]
+[Logo Perla Nera]   Collezione ▾   Progetti   Studio   Servizi ▾   Materiali   [CTA: Progetta il tuo pezzo]
 ```
-- Il CTA primario è sempre visibile nell'header (sticky, contrasto alto), separato dal menu — è l'unica azione "urlata" concessa nel sistema.
-- "Legni & Resina" è un mega-menu che raggruppa Legni, Resina, Tavoli su Misura per forma — evita di affollare la barra con troppe voci mantenendo profondità SEO.
-- "Servizi" nel mega-menu espone anche Manutenzione/Restauro, Per Architetti, Hospitality.
+- "Collezione" è un mega-menu che elenca **tutte** le categorie, incluse quelle "In arrivo" (visibili ma non cliccabili su un catalogo vuoto — linkano a una sezione "raccontaci cosa hai in mente" nel configuratore/richiesta progetto) — comunica ampiezza dello studio da subito.
+- Il CTA primario in header è ora **"Progetta il tuo pezzo"**, non più "...il tuo tavolo" — resta invariato indipendentemente dalla categoria che l'utente ha in mente; è il configuratore stesso a chiedere quale.
+- "Servizi" mega-menu espone Progettazione su misura, Consegna e installazione, Cura e manutenzione (e, in Fase 2, Per Architetti/Hospitality).
 
-### Header (mobile)
-Menu a schermo intero, non drawer laterale stretto — coerente con l'impostazione editoriale: voci grandi, una per riga, CTA "Progetta il tuo tavolo" in fondo sempre visibile + tap-to-call/WhatsApp fisso.
+### Mobile, Footer, Breadcrumb
+Invariati nella logica del documento precedente (menu full-screen, footer a 4 colonne, breadcrumb da secondo livello in su) — cambia solo il contenuto delle voci, coerente con la nuova IA: il footer "Esplora" elenca ora le categorie di Collezione al posto dei soli link tavoli-centrici.
 
-### Footer
-4 colonne: Esplora (sitemap principale) · Servizi · Per Professionisti (architetti/hospitality) · Contatti (NAP, orari, social, WhatsApp). Riga legale in fondo: P.IVA, Privacy, Cookie, Note legali.
+## 7. Convenzioni URL
 
-### Breadcrumb
-Presente su tutte le pagine di secondo livello e oltre (es. Collezione → Progetto, Legni → Noce), con `BreadcrumbList` schema. Assente su Home, Configuratore (per non distrarre durante il flusso) e pagine legali.
+Invariate (Documento 1 §6 versione precedente): italiano, minuscolo, trattini, niente parametri per contenuto indicizzabile, profondità massima 3 livelli. La struttura `/collezione/[categoria]/[prodotto]` e `/progetti/[slug]` rispetta questo vincolo.
 
-## 6. Convenzioni URL
+## 8. Rationale "no pagine spam per città"
 
-- Minuscolo, trattini, italiano (`/tavoli-su-misura`, non `/custom-tables`) — coerente con intento di ricerca italiano e più naturale per il brand.
-- Nessun parametro in URL per contenuti indicizzabili (niente `?id=123`); slug descrittivi (`/collezione/villa-affi-tavolo-noce-resina-nera`).
-- Profondità massima 3 livelli dalla home per qualsiasi pagina rilevante SEO (`/collezione/[slug]`, `/legni/[essenza]`) — mantiene link equity concentrata.
-- Redirect 301 pianificati fin dal giorno 1 (piano redirect vuoto ma predisposto) per qualsiasi futura ristrutturazione URL.
-
-## 7. Rationale “no pagine spam per città”
-
-Il brief chiede struttura local SEO per Verona/Veneto senza spam. Decisione: **una sola pagina di area servita**, integrata in Contatti/Chi Siamo, che elenca le zone realmente servite (Verona, Lago di Garda, Veneto, Nord Italia) con `LocalBusiness` + `areaServed` in schema — non pagine `/tavoli-legno-negrar`, `/tavoli-legno-bardolino`, ecc. Google penalizza pagine "doorway" quasi identiche; l'autorità locale si costruisce meglio con recensioni, NAP coerente, contenuti editoriali reali (case study con località pubblicabile) e citazioni locali (Google Business Profile, directory di settore).
+Invariato — v. versione precedente, ora applicabile a tutte le categorie e non solo ai tavoli: una sola pagina/area servita con `LocalBusiness` + `areaServed`, mai pagine doorway per comune o per combinazione categoria×città.

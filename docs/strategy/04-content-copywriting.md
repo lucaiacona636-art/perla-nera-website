@@ -1,6 +1,8 @@
 # Content & Copywriting
 
 > Documento 5 di 12. Voce del brand, copy reale (non segnaposto) per l'MVP, microcopy, meta tag. Le regole di tono sono definite nel Documento 0 §3 — qui l'applicazione pratica.
+>
+> **Nota di revisione**: dopo la correzione di posizionamento (Documento 0 §1), il CTA primario sitewide è **"Progetta il tuo pezzo"**, non più "...il tuo tavolo" — resta specifico ("il tuo tavolo") solo nei blocchi di copy che parlano esplicitamente della categoria Tavoli (es. una sezione dedicata a quella categoria in Collezione), mai nell'header globale o in homepage.
 
 ## 1. Lessico — cosa usare, cosa evitare
 
@@ -14,15 +16,15 @@
 
 ### Hero
 ```
-Eyebrow (mono, tracked):  ATELIER DI FALEGNAMERIA — VERONA
+Eyebrow (mono, tracked):  STUDIO DI ARTIGIANATO E DESIGN — VERONA
 
 H1:      Materia. Tempo. Unicità.
 
-Sub:     Tavoli e complementi d'arredo in legno massello e resina,
-         disegnati a mano attorno al tuo spazio. Verona, Lago di Garda,
-         Nord Italia.
+Sub:     Tavoli, complementi d'arredo e pezzi unici in legno massello
+         e resina, progettati a mano attorno al tuo spazio. Verona,
+         Lago di Garda, Nord Italia.
 
-CTA 1 (primaria):    Progetta il tuo tavolo
+CTA 1 (primaria):    Progetta il tuo pezzo
 CTA 2 (secondaria):  Scopri Perla Nera
 ```
 
@@ -57,15 +59,15 @@ CTA:      Scopri i tavoli su misura →
 
 ### Sezione "Configuratore" (teaser)
 ```
-Eyebrow:  CREA IL TUO TAVOLO
+Eyebrow:  PROGETTA IL TUO PEZZO
 
 H2:       Prova a immaginarlo. Noi lo rendiamo reale.
 
-Body:     Scegli essenza, forma, bordo, resina e finitura: guarda
-          il tuo tavolo prendere forma prima ancora di ordinarlo.
-          Due minuti per iniziare un progetto vero.
+Body:     Scegli la categoria — un tavolo, un complemento, un pezzo
+          fuori catalogo — e guarda il tuo progetto prendere forma
+          prima ancora di ordinarlo. Due minuti per iniziare.
 
-CTA:      Progetta il tuo tavolo →
+CTA:      Progetta il tuo pezzo →
 ```
 
 ### Sezione "Materiali" (Legni & Resina, teaser)
@@ -120,11 +122,11 @@ CTA:      Scopri i servizi →
 
 ### CTA finale (fine pagina, sezione dark)
 ```
-H2:       Il tuo tavolo comincia da una conversazione.
+H2:       Il tuo pezzo comincia da una conversazione.
 
 Sub:      Raccontaci il tuo spazio: rispondiamo entro 48 ore.
 
-CTA 1:    Progetta il tuo tavolo
+CTA 1:    Progetta il tuo pezzo
 CTA 2:    Parliamo del tuo spazio
 ```
 
@@ -132,29 +134,35 @@ CTA 2:    Parliamo del tuo spazio
 
 | Pagina | Headline guida | Angolo narrativo |
 |---|---|---|
-| Chi Siamo | "Non vendiamo tavoli. Li costruiamo." | Storia del laboratorio, valori, persone/volti reali, perché Verona/Veneto, filosofia materia-tempo-unicità senza ripetere il manifesto homepage parola per parola — qui si aggiungono fatti concreti (anno di fondazione, numero di pezzi, dove si lavora). |
-| Processo | "Dal tronco al tavolo" | Timeline verticale in 6-7 fasi (selezione legno → taglio → stagionatura → progettazione → colata resina → levigatura/finitura → consegna/installazione), ogni fase con foto reale + 2-3 righe, tempi indicativi onesti (non "tempi record"). |
-| Servizi | "Un atelier, più competenze" | Griglia di card servizio (v. §6), ognuna con link a pagina/sezione dedicata dove esiste. |
+| Studio | "Non vendiamo tavoli. Lavoriamo la materia." | Storia dello studio, valori, persone/volti reali, perché Verona/Veneto, filosofia materia-tempo-unicità senza ripetere il manifesto homepage parola per parola — qui si aggiungono fatti concreti (anno di fondazione, numero di pezzi, dove si lavora, le categorie in cui si esprime lo studio oltre ai tavoli). |
+| Processo | "Dal materiale al pezzo finito" | Timeline verticale in 6-7 fasi (selezione materiale → taglio → stagionatura → progettazione → colata resina → levigatura/finitura → consegna/installazione), scritta per essere vera per qualunque categoria — non solo "dal tronco al tavolo". Ogni fase con foto reale + 2-3 righe, tempi indicativi onesti. |
+| Servizi | "Uno studio, più competenze" | Griglia di card servizio (v. §6), ognuna con link a pagina/sezione dedicata dove esiste. |
+| Richiedi un progetto | "Raccontaci cosa hai in mente" | Form diretto per chi non passa dal configuratore — utile soprattutto per categorie non ancora configurabili (pezzi scultorei, progetti speciali): campo categoria, descrizione libera, riferimenti/immagini. |
 | Contatti | "Parliamo del tuo spazio" | Form breve + NAP + orari + mappa + canali diretti (telefono, WhatsApp) — zero attrito, nessun campo non necessario in questa pagina (il dettaglio lo raccoglie il configuratore). |
 
 ## 4. Microcopy — configuratore
 
 ```
-Titolo esperienza:        Crea il tuo tavolo
-Sottotitolo:               7 passi, la tua idea prende forma in tempo reale.
+Titolo esperienza:        Progetta il tuo pezzo
+Sottotitolo:               Scegli una categoria: la tua idea prende forma in tempo reale.
 
+Step 0 — Categoria:        Che pezzo vuoi progettare?
 Step 1 — Essenza:          Scegli il legno
 Step 2 — Forma:             Scegli la forma
 Step 3 — Dimensioni:        Definisci le misure
 Step 4 — Bordo:              Scegli il bordo
 Step 5 — Resina:             Scegli la resina
 Step 6 — Finitura:           Scegli la finitura
-Step 7 — Gambe:               Scegli la base
+Step 7 — Base:                Scegli la base
 
 Riepilogo (step finale):    Il tuo progetto
 CTA riepilogo:               Richiedi il tuo progetto
 
-Helper sotto la preview:     Ruota per vedere il tavolo da ogni lato.
+Categoria "in arrivo":      Questa categoria è in lavorazione. Raccontaci
+                              comunque cosa hai in mente — la valutiamo
+                              come progetto speciale.
+
+Helper sotto la preview:     Ruota per vedere il pezzo da ogni lato.
 Salvataggio automatico:      La tua configurazione resta salvata: puoi
                               tornare quando vuoi.
 Nessun prezzo (disclaimer
@@ -177,13 +185,13 @@ Errore invio form:             Non siamo riusciti a inviare la richiesta.
 
 | Pagina | Meta Title (≤60 car.) | Meta Description (≤155 car.) |
 |---|---|---|
-| Home | Perla Nera — Tavoli in legno massello e resina, Verona | Atelier artigianale a Verona: tavoli e complementi d'arredo su misura in legno massello e resina epossidica. Progetta il tuo tavolo online. |
-| Tavoli su misura | Tavoli su misura in legno e resina | Legno massello Verona | Tavoli su misura in legno massello e resina epossidica, progettati per il tuo spazio. Essenze, forme e finiture personalizzabili. |
-| Configuratore | Configura il tuo tavolo su misura | Perla Nera | Scegli essenza, forma, bordo, resina e finitura: crea il tuo tavolo su misura e richiedi un progetto personalizzato in pochi minuti. |
-| Chi Siamo | Chi siamo — Perla Nera, atelier di falegnameria | La storia e il metodo di Perla Nera: falegnameria artigianale a Verona specializzata in tavoli su misura in legno e resina. |
-| Processo | Il processo artigianale | Perla Nera | Dal tronco al tavolo: come nasce un pezzo Perla Nera, tra selezione del legno, stagionatura, resina epossidica e finiture a mano. |
-| Servizi | Servizi | Tavoli su misura, restauro, consulenza | Progettazione su misura, complementi d'arredo, restauro e manutenzione, consulenza per architetti e hospitality. |
-| Contatti | Contatti — Perla Nera, Verona | Contatta l'atelier Perla Nera a Verona: richiedi un progetto, un preventivo o fissa un sopralluogo per il tuo tavolo su misura. |
+| Home | Perla Nera — Studio di artigianato e design, Verona | Tavoli, complementi d'arredo e pezzi unici in legno massello e resina epossidica, progettati a mano a Verona. Progetta il tuo pezzo online. |
+| Collezione | Collezione — Tavoli, complementi e pezzi unici | Perla Nera | Sfoglia la collezione Perla Nera per categoria: tavoli su misura, complementi d'arredo, oggetti di design, pezzi scultorei. |
+| Configuratore | Progetta il tuo pezzo su misura | Perla Nera | Scegli una categoria — tavolo, complemento, progetto speciale — e guarda il tuo pezzo prendere forma prima di richiedere un progetto. |
+| Studio | Studio — Perla Nera, artigianato e design | Verona | Chi siamo e come lavoriamo: uno studio italiano che progetta e realizza pezzi unici in legno massello e resina epossidica. |
+| Richiedi un progetto | Richiedi un progetto — Perla Nera | Raccontaci il tuo spazio o la tua idea: rispondiamo entro 48 ore con i prossimi passi per il tuo progetto su misura. |
+
+Riferimento pagine Fase 1b (v. Documento 1 §3), pattern da applicare quando si costruiscono: Processo, Materiali, Servizi, Assistenza, Contatti.
 
 Pattern per pagine future (Legni, Resina, Case study): `[Elemento specifico] | Perla Nera — [beneficio/intento primario]`, mai il nome del brand ripetuto in coda a ogni pagina in modo identico (varietà per evitare cannibalizzazione percepita).
 

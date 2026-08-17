@@ -47,16 +47,16 @@ Il form professionale è **distinto** da quello del configuratore: meno enfasi s
 
 | Fase del funnel | CTA primaria | CTA secondaria |
 |---|---|---|
-| Home / awareness | "Progetta il tuo tavolo" | "Scopri Perla Nera" |
-| Pagine prodotto (Legni, Resina, Tavoli su misura) | "Progetta il tuo tavolo" | "Scopri il progetto" (→ case study correlato) |
-| Collezione / Case study | "Richiedi un progetto simile" | "Scopri Perla Nera" |
-| Processo, Chi Siamo | "Progetta il tuo tavolo" | "Parliamo del tuo spazio" |
+| Home / awareness | "Progetta il tuo pezzo" | "Scopri Perla Nera" |
+| Collezione (categoria specifica, es. Tavoli) | "Progetta il tuo pezzo" | "Scopri il progetto" (→ case study correlato) |
+| Collezione / Case study (indice) | "Richiedi un progetto simile" | "Scopri Perla Nera" |
+| Processo, Studio | "Progetta il tuo pezzo" | "Parliamo del tuo spazio" |
 | Servizi | "Richiedi un preventivo" | "Contattaci" |
-| Manutenzione e Restauro | "Richiedi un intervento" | — |
+| Cura e Manutenzione | "Richiedi un intervento" | — |
 | Per Architetti | "Parliamo del tuo progetto" | "Scarica la scheda tecnica" (Fase 2) |
 | Hospitality | "Parliamo del tuo progetto" | "Richiedi un preventivo" |
 | Contatti | "Invia richiesta" | "Chiama" / "WhatsApp" |
-| Footer (tutte le pagine) | "Progetta il tuo tavolo" | — |
+| Footer (tutte le pagine) | "Progetta il tuo pezzo" | — |
 
 Ogni pagina ha **una sola** CTA primaria visivamente dominante — coerente con la regola "un solo CTA principale per schermata" del design system (evita di diluire l'attenzione, principio confermato anche dai dati UX consultati).
 

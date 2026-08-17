@@ -1,42 +1,90 @@
-# Architettura del Configuratore — "Crea il tuo tavolo"
+# Architettura del Configuratore — "Progetta il tuo pezzo"
 
 > Documento 7 di 12. Funzionalità centrale del sito. Definisce modello dati, step, stato, contratto con il livello 3D (Documento 8) e flusso di lead generation. Nessun prezzo automatico in Fase 1 — obiettivo: lead qualificato con contesto completo.
+>
+> **Nota di revisione**: la versione precedente partiva dal presupposto "si configura un tavolo". Corretto in linea con Documento 0 §1 e Documento 1: il configuratore parte dalla **categoria di pezzo**, e il flusso a 7 step descritto qui sotto è lo schema di configurazione della categoria Tavoli — oggi la più completa, non l'unica prevista dall'architettura.
 
-## 1. Principio guida: catalogo dati, non codice
+## 1. Modello a due livelli: Categoria → Schema di configurazione
 
-Ogni opzione (essenza, forma, bordo, resina, finitura, gamba) è un **record in un catalogo**, non un valore hardcoded nell'interfaccia. Aggiungere una nuova essenza o un nuovo colore di resina significa aggiungere una riga dati (via CMS in Fase 2, via file di configurazione versionato in Fase 1), mai toccare il codice dei componenti. Questo risponde direttamente al requisito "sistema facilmente estendibile" per resina/essenze/dettagli.
+```
+ProductCategory ("tavoli", "complementi-arredo", "oggetti-design",
+                  "pezzi-scultorei", "progetto-speciale")
+        │
+        └── ConfigurationSchema  →  sequenza ordinata di Step
+                                     (ogni Step è un "tipo" riusabile:
+                                     Essenza, Forma, Dimensioni, Bordo,
+                                     Resina, Finitura, Base/Gambe, Dettagli,
+                                     Brief libero)
+```
 
-### Modello dati (TypeScript, indicativo)
+```ts
+interface ProductCategory {
+  id: string;              // "tavoli", "complementi-arredo", ...
+  label: string;           // "Tavoli"
+  status: "available" | "coming-soon" | "bespoke-only";
+  schemaId: string;        // quale ConfigurationSchema usa
+  heroImage: string;
+  shortDescription: string;
+}
+
+interface ConfigurationSchema {
+  id: string;               // "schema-tavoli"
+  steps: StepDefinition[];  // riferimenti a tipi di step, in ordine
+}
+
+interface StepDefinition {
+  type: "essence" | "shape" | "dimensions" | "edge" | "resin" | "finish" | "base" | "detail" | "free-brief";
+  required: boolean;
+  catalogKey?: string;      // quale catalogo di opzioni alimenta questo step (v. §2)
+}
+```
+
+- **Categoria "Tavoli"** (`status: "available"`) usa lo `ConfigurationSchema` a 7 step descritto in §3 — è l'unica, oggi, con cataloghi reali (essenze, forme, resine...).
+- **Categorie "in arrivo"** (Complementi d'arredo, Oggetti di design, Pezzi scultorei — `status: "coming-soon"`) sono visibili in Collezione e nello step 0 del configuratore, ma non aprono un flusso a step: portano a `/richiedi-un-progetto` con la categoria precompilata, oppure a una versione ridotta del configuratore con solo lo step `free-brief` (v. sotto) — mai a un catalogo di opzioni che non esiste ancora.
+- **Categoria "Progetti speciali su misura"** (`status: "bespoke-only"`) non ha *mai* uno schema a opzioni: usa uno `ConfigurationSchema` di un solo step, `free-brief` — descrizione libera, riferimenti/immagini, dimensioni indicative. È la valvola per tutto ciò che non rientra in nessuna categoria ancora modellata, requisito esplicito del brief precedente ("senza che il sito sembri progettato esclusivamente per i tavoli").
+- **Aggiungere una categoria reale in futuro** (es. attivare "Complementi d'arredo" con un vero schema a step) significa: creare il `ConfigurationSchema` combinando step-type già esistenti (Essenza, Dimensioni...) più eventuali nuovi step-type se serve un concetto mai visto — mai riscrivere il configuratore esistente.
+
+### Step 0 — Selezione categoria (nuovo, precede tutto)
+
+```
+Titolo:      Che pezzo vuoi progettare?
+Sottotitolo: Scegli una categoria per iniziare — se non la trovi, raccontacelo comunque.
+
+[ Tavoli ]  [ Complementi d'arredo — presto disponibile ]
+[ Oggetti di design — presto disponibile ]  [ Pezzi scultorei — presto disponibile ]
+[ Ho in mente un progetto speciale → ]
+```
+
+Selezionare "Tavoli" apre lo schema §3. Selezionare una categoria "in arrivo" o "Progetto speciale" apre il singolo step `free-brief`. In entrambi i casi l'evento `start_configurator` registra `category_id` (Documento 9 §3, aggiornato).
+
+## 2. Principio guida per i cataloghi: dati, non codice
+
+Invariato nella sostanza rispetto alla versione precedente — vale per ogni categoria, non solo Tavoli. Ogni opzione (essenza, forma, bordo, resina, finitura, base) è un **record in un catalogo**, non un valore hardcoded nell'interfaccia:
 
 ```ts
 interface CatalogOption {
-  id: string;            // "noce", "resina-nera"
-  label: string;         // "Noce"
-  active: boolean;       // consente disattivazione senza cancellazione
+  id: string;
+  label: string;
+  active: boolean;
   order: number;
-  description?: string;  // per tooltip/microcopy
-  thumbnailUrl: string;  // swatch fotografico reale (non colore piatto)
-  material: {             // contratto verso il layer 3D (Documento 8)
+  description?: string;
+  thumbnailUrl: string;
+  material: {
     type: "pbr" | "flat-color" | "transparent";
     albedoMapUrl?: string;
     normalMapUrl?: string;
     roughness?: number;
-    baseColor?: string;   // fallback CSS per swatch/preview statica
+    baseColor?: string;
   };
 }
 
-interface Essence extends CatalogOption {}          // noce, rovere, olmo, ulivo, ...
-interface ShapeOption extends CatalogOption {
-  geometryId: string;                                 // riferimento alla mesh/parametrizzazione 3D
-  dimensionRules: DimensionRules;
-}
-interface EdgeOption extends CatalogOption {}         // naturale, vivo, mosso, lavorato, regolare
-interface ResinOption extends CatalogOption {}        // nessuna, trasparente, nera, [estendibile]
-interface FinishOption extends CatalogOption {}       // naturale, opaca, satinata, ...
-interface LegOption extends CatalogOption {
-  category: "acciaio" | "legno" | "custom";
-}
-interface DetailOption extends CatalogOption {}       // Fase 2: incisioni, inserti metallici, ...
+interface Essence extends CatalogOption {}
+interface ShapeOption extends CatalogOption { geometryId: string; dimensionRules: DimensionRules; }
+interface EdgeOption extends CatalogOption {}
+interface ResinOption extends CatalogOption {}
+interface FinishOption extends CatalogOption {}
+interface BaseOption extends CatalogOption { category: "acciaio" | "legno" | "custom"; }
+interface DetailOption extends CatalogOption {}
 
 interface DimensionRules {
   length: { min: number; max: number; default: number; step: number };
@@ -45,68 +93,60 @@ interface DimensionRules {
 }
 ```
 
-I cataloghi vivono in Fase 1 come file dati statici tipizzati (es. `content/configurator/essenze.ts`), pronti per essere sostituiti 1:1 da una query CMS in Fase 2 senza cambiare i componenti che li consumano (stesso shape dei dati).
+I cataloghi (per ora solo quelli della categoria Tavoli hanno contenuto reale) vivono come file dati tipizzati in Fase 1 (`content/configurator/`), pronti per una query CMS in Fase 2 — stesso `shape` dei dati, nessun refactor dei componenti che li consumano. Una futura categoria "Complementi d'arredo" con base legno/acciaio riuserà `BaseOption` così com'è.
 
-## 2. Step del configuratore
+## 3. Schema "Tavoli" (riferimento — la categoria oggi completa)
 
-| # | Step | Obbligatorio | Influenza sulla preview |
-|---|---|---|---|
-| 1 | Essenza | Sì | Materiale/texture legno |
-| 2 | Forma | Sì | Geometria base |
-| 3 | Dimensioni | Sì | Scala/proporzioni geometria |
-| 4 | Bordo | No (default: "regolare") | Modifica silhouette bordo |
-| 5 | Resina | No (default: "nessuna") | Materiale/colore resina, trasparenza |
-| 6 | Finitura | No (default: "naturale") | Shader (roughness/riflesso) |
-| 7 | Gambe | No (default: prima gamba attiva del catalogo) | Modello gambe |
-| — | Riepilogo — "Il tuo progetto" | — | Nessuna (schermata di conferma) |
+| # | Step | Tipo | Obbligatorio | Influenza sulla preview |
+|---|---|---|---|---|
+| 0 | Categoria | `category` | Sì | — (seleziona lo schema) |
+| 1 | Essenza | `essence` | Sì | Materiale/texture legno |
+| 2 | Forma | `shape` | Sì | Geometria base |
+| 3 | Dimensioni | `dimensions` | Sì | Scala/proporzioni geometria |
+| 4 | Bordo | `edge` | No (default: "regolare") | Modifica silhouette bordo |
+| 5 | Resina | `resin` | No (default: "nessuna") | Materiale/colore resina, trasparenza |
+| 6 | Finitura | `finish` | No (default: "naturale") | Shader (roughness/riflesso) |
+| 7 | Base/Gambe | `base` | No (default: prima opzione attiva) | Modello gambe |
+| — | Riepilogo — "Il tuo progetto" | — | — | Nessuna (schermata di conferma) |
 
-Step opzionali mostrano sempre il CTA "Decido dopo" (microcopy, Documento 5 §4) con default sensato pre-applicato — l'utente non è mai bloccato da una scelta che non vuole ancora fare, requisito diretto del brief ("nessun prezzo, lead qualificato" implica anche "nessun attrito superfluo").
+Step opzionali mostrano sempre il CTA "Decido dopo" (microcopy, Documento 5 §4) con default sensato pre-applicato. Lo step `detail` (incisioni, inserti) resta predisposto nel modello ma nascosto finché non c'è un catalogo reale.
 
-Step 8 "Dettagli" (incisioni, inserti) è predisposto nel modello dati come `DetailOption[]` ma **nascosto in Fase 1** finché non c'è un catalogo reale da mostrare — evita di promettere personalizzazioni non ancora disponibili.
+**Perché questo schema resta "di riferimento" e non "il" configuratore**: quando una seconda categoria (es. Complementi d'arredo) avrà cataloghi reali, il suo `ConfigurationSchema` riuserà `essence`, `dimensions`, `finish`, `base` da qui e aggiungerà solo ciò che è realmente specifico (es. per una consolle potrebbe non servire `shape` ma servire un nuovo step `mounting` — a muro/a terra). Il codice che renderizza uno step non sa "sono nel flusso tavoli": sa solo "sto renderizzando uno step di tipo `essence`".
 
-## 3. Stato e persistenza
+## 4. Stato e persistenza
 
-- Gestione stato locale con **Zustand** (store leggero, nessun boilerplate Redux, ottima integrazione con React Server Components/Next.js) — store dedicato `useConfiguratorStore` con: selezioni correnti per categoria, step attivo, storico step completati, timestamp ultima modifica.
-- **Persistenza automatica** in `localStorage` (debounced) ad ogni modifica — implementa la promessa di microcopy "la tua configurazione resta salvata". Nessun account richiesto.
-- Idratazione dello store al mount: se esiste una configurazione salvata recente (< 30 giorni), propone di riprenderla ("Hai una configurazione in corso, vuoi continuare?") invece di sovrascriverla silenziosamente.
-- Lo stato del configuratore è **serializzabile 1:1** nel payload del lead (v. §5) — nessuna trasformazione ad-hoc tra "stato UI" e "dato inviato".
+Invariato nella logica: **Zustand**, store `useConfiguratorStore` con selezioni per step, persistenza `localStorage` debounced, ripresa configurazione entro 30 giorni. Aggiunta: lo store tiene ora anche `categoryId` come primo campo — determina quale schema/cataloghi caricare, tutto il resto della logica di stato è identico indipendentemente dalla categoria scelta.
 
-## 4. Contratto con il layer di preview (3D + fallback)
+## 5. Contratto con il layer di preview (3D + fallback)
 
-Il configuratore non disegna la preview: **emette uno stato** (`SceneState`) che il layer di rendering consuma, così UI e motore 3D restano disaccoppiati (dettagli motore in Documento 8):
+`SceneState` resta il contratto verso il rendering (Documento 8), ora esplicitamente parametrizzato per categoria invece di assumere sempre un piano tavolo:
 
 ```ts
 interface SceneState {
-  essenceId: string;
-  shapeId: string;
-  dimensions: { length: number; width: number; height?: number };
-  edgeId: string;
-  resinId: string;
-  finishId: string;
-  legId: string;
+  categoryId: string;
+  // campi seguenti presenti/assenti secondo lo schema della categoria attiva
+  essenceId?: string;
+  shapeId?: string;
+  dimensions?: { length: number; width: number; height?: number };
+  edgeId?: string;
+  resinId?: string;
+  finishId?: string;
+  baseId?: string;
 }
 ```
 
-- **Percorso primario** (desktop/mobile capaci, WebGL disponibile, no `prefers-reduced-motion`): preview 3D interattiva in tempo reale via React Three Fiber, che consuma `SceneState` e ricompone geometria/materiali.
-- **Percorso di fallback** (WebGL non disponibile, dispositivo di fascia bassa, `prefers-reduced-motion`, o 3D non ancora caricato): galleria di immagini fotografiche/render "closest match" filtrata per essenza+forma — non un composito automatico per ogni combinazione (irrealizzabile fotograficamente), ma un set curato che si aggiorna in base alle 2 selezioni con maggior peso visivo (essenza, forma). Il resto della configurazione resta comunque nel riepilogo testuale.
-- In entrambi i percorsi, il riepilogo finale ("Il tuo progetto") è **sempre testuale e leggibile**, indipendente dal fatto che il 3D abbia caricato — nessuna informazione critica esiste solo dentro il canvas 3D (requisito di accessibilità e di robustezza del lead).
+Per la categoria "Progetto speciale"/`free-brief`, non esiste `SceneState` renderizzabile: la preview è sostituita da un pannello che mostra in tempo reale il riepilogo testuale del brief e le immagini caricate — coerente con il principio (§4 del documento precedente, qui §6) che il riepilogo è sempre leggibile indipendentemente dal 3D.
 
-## 5. Lead capture — dati raccolti e payload
+Percorsi primario/fallback invariati (Documento 8): 3D live dove possibile, galleria fotografica curata come fallback, riepilogo testuale sempre presente.
 
-Campi form (schermata "Il tuo progetto"):
+## 6. Lead capture — dati raccolti e payload
 
-```
-Nome*            Email*             Telefono*
-Città                                 Dimensioni desiderate (precompilate da step 3, editabili)
-Note (libere)                        Caricamento immagini (opzionale, max 5, riferimento ispirazione/spazio)
-Consenso privacy* (checkbox, link a /privacy)
-```
-
-Payload inviato all'endpoint lead (`POST /api/lead`, v. Documento 11 per lo stack):
+Campi form invariati, con l'aggiunta esplicita della categoria:
 
 ```json
 {
   "source": "configurator",
+  "category": "tavoli",
   "submittedAt": "2026-08-17T10:00:00Z",
   "contact": { "name": "", "email": "", "phone": "", "city": "" },
   "desiredDimensions": { "length": 220, "width": 100 },
@@ -114,9 +154,9 @@ Payload inviato all'endpoint lead (`POST /api/lead`, v. Documento 11 per lo stac
     "essence": "noce", "shape": "rettangolare",
     "dimensions": { "length": 220, "width": 100 },
     "edge": "bordo-vivo", "resin": "nera",
-    "finish": "opaca", "legs": "acciaio-nero"
+    "finish": "opaca", "base": "acciaio-nero"
   },
-  "configurationSummaryText": "Tavolo rettangolare in noce, 220×100cm, bordo vivo, resina nera, finitura opaca, gambe in acciaio nero.",
+  "configurationSummaryText": "Tavolo rettangolare in noce, 220×100cm, bordo vivo, resina nera, finitura opaca, base in acciaio nero.",
   "notes": "",
   "attachments": ["https://.../upload1.jpg"],
   "consent": true,
@@ -124,17 +164,12 @@ Payload inviato all'endpoint lead (`POST /api/lead`, v. Documento 11 per lo stac
 }
 ```
 
-- `configurationSummaryText` generato automaticamente (non scritto a mano) — è ciò che chi riceve il lead legge per primo, prima ancora di aprire il JSON strutturato.
-- Anti-spam: honeypot field + rate limiting sull'endpoint, niente CAPTCHA visibile (frizione inutile per un lead già "caldo").
-- Upload immagini gestito via storage esterno (v. Documento 11) con validazione tipo/dimensione file lato client prima dell'invio.
-- Alla ricezione: email di conferma automatica al cliente (riepilogo + prossimi passi) + notifica interna (email/CRM, v. roadmap Fase 2) — il sito garantisce l'invio, l'automazione di notifica è infrastruttura leggera da collegare in MVP (es. servizio email transazionale), non un CRM completo.
+Per categorie `coming-soon`/`bespoke-only`, `configuration` è sostituito da `{ "freeBrief": "testo libero descrizione" }` — stesso endpoint, stesso payload di contatto, campo `configuration` semplicemente diverso nella forma. Resto del flusso (email conferma, notifica interna, storage) invariato dalla versione precedente.
 
-## 6. Regole di validazione
+## 7. Regole di validazione
 
-- Dimensioni vincolate per forma (`DimensionRules` per `shapeId`) — non si può richiedere un ovale 40×40cm; gli step mostrano min/max coerenti e un messaggio se fuori range ("Per questa forma consigliamo lunghezze da X a Y cm — possiamo comunque valutare misure speciali, scrivilo nelle note").
-- Nessun campo obbligatorio bloccante oltre contatto (nome/email/telefono) e consenso privacy nella schermata finale.
-- Validazione email/telefono client-side + server-side (mai solo client-side per un endpoint pubblico).
+Invariate, applicate per-categoria dove rilevante (`DimensionRules` esiste solo per categorie con step `dimensions`). Nessun campo obbligatorio bloccante oltre contatto e consenso privacy nella schermata finale, qualunque categoria.
 
-## 7. Eventi analytics generati dal configuratore
+## 8. Eventi analytics generati dal configuratore
 
-Mappatura diretta sugli eventi richiesti (Documento 9): `start_configurator` (primo step aperto), `configurator_step` (ad ogni step completato, con `step_id` e `selection_id`), `complete_configurator` (arrivo al riepilogo), `submit_lead` (invio form riuscito). Questi eventi permettono di individuare esattamente a quale step si perde la maggior parte degli utenti — dato che guiderà le iterazioni post-lancio più di qualsiasi altra metrica.
+Come da Documento 9 §3, con l'aggiunta di `category_id` come parametro su tutti gli eventi: `start_configurator` (ora con `category_id` fin dallo step 0), `configurator_step`, `complete_configurator`, `submit_lead`. Permette di leggere in analytics non solo "dove abbandonano" ma "quali categorie generano interesse anche prima di avere un catalogo reale" — segnale diretto per decidere quale categoria attivare per prima in Fase 2.
