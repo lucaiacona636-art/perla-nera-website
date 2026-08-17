@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import type { LeadPayload } from "./lead-schema";
+import { business } from "@/content/business";
 
 // Infrastruttura lead reale (Documento 10 §3, Fase 1): email transazionale
 // via Resend + webhook opzionale verso strumenti esterni (Zapier, Make,
@@ -12,7 +13,7 @@ import type { LeadPayload } from "./lead-schema";
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 const FROM = process.env.RESEND_FROM_EMAIL || "Perla Nera <onboarding@resend.dev>";
-const NOTIFICATION_TO = process.env.LEAD_NOTIFICATION_EMAIL || "info@perlanera.it";
+const NOTIFICATION_TO = process.env.LEAD_NOTIFICATION_EMAIL || business.email;
 const WEBHOOK_URL = process.env.LEAD_WEBHOOK_URL;
 
 const sourceLabels: Record<LeadPayload["source"], string> = {

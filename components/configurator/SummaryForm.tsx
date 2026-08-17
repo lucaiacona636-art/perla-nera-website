@@ -16,6 +16,7 @@ import { leadContactSchema, type LeadContactInput } from "@/lib/lead-schema";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { business } from "@/content/business";
 
 function buildTavoliSummary(store: ReturnType<typeof useConfiguratorStore.getState>) {
   const essence = essences.find((e) => e.id === store.essenceId);
@@ -193,7 +194,7 @@ export function SummaryForm() {
 
           {status === "error" && (
             <p className="text-sm text-error">
-              Non siamo riusciti a inviare la richiesta. Riprova o scrivici a info@perlanera.it.
+              Non siamo riusciti a inviare la richiesta. Riprova o scrivici a {business.email}.
             </p>
           )}
 

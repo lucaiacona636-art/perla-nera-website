@@ -12,6 +12,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { business } from "@/content/business";
 
 const requestSchema = leadContactSchema.extend({
   category: z.string().optional(),
@@ -159,7 +160,7 @@ export function RichiediProgettoForm() {
 
             {status === "error" && (
               <p className="text-sm text-error">
-                Non siamo riusciti a inviare la richiesta. Riprova o scrivici a info@perlanera.it.
+                Non siamo riusciti a inviare la richiesta. Riprova o scrivici a {business.email}.
               </p>
             )}
 

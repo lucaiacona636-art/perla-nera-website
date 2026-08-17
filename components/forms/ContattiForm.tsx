@@ -10,6 +10,7 @@ import { categories } from "@/content/categories";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { business } from "@/content/business";
 
 const budgetRanges = [
   { value: "", label: "Preferisco dirlo a voce" },
@@ -125,7 +126,7 @@ export function ContattiForm() {
 
       <p className="text-xs text-text-light-muted">
         Hai immagini o ispirazioni da mostrarci? Scrivici direttamente a{" "}
-        <a href="mailto:info@perlanera.it" className="underline">info@perlanera.it</a> allegandole alla mail.
+        <a href={`mailto:${business.email}`} className="underline">{business.email}</a> allegandole alla mail.
       </p>
 
       <label className="flex items-start gap-3 text-sm text-text-light-muted">
@@ -139,7 +140,7 @@ export function ContattiForm() {
 
       {status === "error" && (
         <p className="text-sm text-error">
-          Non siamo riusciti a inviare il messaggio. Riprova o scrivici a info@perlanera.it.
+          Non siamo riusciti a inviare il messaggio. Riprova o scrivici a {business.email}.
         </p>
       )}
 

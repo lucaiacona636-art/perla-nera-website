@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { AssistenzaForm } from "@/components/forms/AssistenzaForm";
+import { business } from "@/content/business";
 
 export const metadata: Metadata = {
   title: "Assistenza",
@@ -26,7 +27,7 @@ const faq = [
   { q: "Quanto costa una valutazione?", a: "La prima valutazione, sulla base delle informazioni e delle foto che ci mandi, non ha costo. Un eventuale sopralluogo o intervento viene sempre concordato prima." },
   { q: "Quanto tempo richiede un intervento?", a: "Dipende dal tipo di lavorazione: una lucidatura può richiedere pochi giorni, un ripristino più articolato anche alcune settimane. Te lo indichiamo dopo la valutazione." },
   { q: "Posso richiedere assistenza anche se il pezzo non è Perla Nera?", a: "Sì, valutiamo anche pezzi in legno massello e resina che non abbiamo realizzato noi, caso per caso." },
-  { q: "Come faccio a mostrarvi il problema?", a: "Bastano alcune foto ben illuminate, inviate tramite il modulo qui sotto o via email a info@perlanera.it: aiutano molto a capire di cosa si tratta prima ancora di parlarne." },
+  { q: "Come faccio a mostrarvi il problema?", a: `Bastano alcune foto ben illuminate, inviate tramite il modulo qui sotto o via email a ${business.email}: aiutano molto a capire di cosa si tratta prima ancora di parlarne.` },
 ];
 
 const faqJsonLd = {

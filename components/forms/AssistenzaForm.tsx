@@ -9,6 +9,7 @@ import { leadContactSchema } from "@/lib/lead-schema";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { business } from "@/content/business";
 
 const assistanceSchema = leadContactSchema.extend({
   pieceDescription: z.string().min(5, "Descrivi brevemente il pezzo (es. tavolo in noce, acquistato circa...)"),
@@ -103,7 +104,7 @@ export function AssistenzaForm() {
 
       <p className="text-xs text-text-light-muted">
         Hai foto del pezzo o del problema da mostrarci? Scrivici direttamente a{" "}
-        <a href="mailto:info@perlanera.it" className="underline">info@perlanera.it</a> allegandole alla mail — ci aiutano a valutare la richiesta più velocemente.
+        <a href={`mailto:${business.email}`} className="underline">{business.email}</a> allegandole alla mail — ci aiutano a valutare la richiesta più velocemente.
       </p>
 
       <label className="flex items-start gap-3 text-sm text-text-light-muted">
@@ -117,7 +118,7 @@ export function AssistenzaForm() {
 
       {status === "error" && (
         <p className="text-sm text-error">
-          Non siamo riusciti a inviare la richiesta. Riprova o scrivici a info@perlanera.it.
+          Non siamo riusciti a inviare la richiesta. Riprova o scrivici a {business.email}.
         </p>
       )}
 
