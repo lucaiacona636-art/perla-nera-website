@@ -32,7 +32,7 @@ export function ConfiguratorShowcase3D() {
           edgeId: "naturale",
           resin: { active: true, baseColor: resinaTurchese.material.baseColor, transparent: false, roughness: resinaTurchese.material.roughness ?? 0.1 },
           finishRoughness: 0.35,
-          base: { baseColor: baseLegno.material.baseColor, roughness: baseLegno.material.roughness ?? 0.6, category: "legno" },
+          base: { baseColor: baseLegno.material.baseColor, roughness: baseLegno.material.roughness ?? 0.6, category: "legno", id: baseLegno.id },
         }}
         fallback={
           <div

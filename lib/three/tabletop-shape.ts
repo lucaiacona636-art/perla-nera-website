@@ -50,7 +50,12 @@ export function resolveTableFamily({ shapeId, edgeId, essenceId, resinActive }: 
   // di lastra naturale: non si comporta come le altre essenze, per scelta
   // esplicita di prodotto — non un default "quando non sappiamo cosa fare".
   if (essenceId === "ulivo" || (shapeId === "shaped" && organicEdge)) return "natural-slab";
-  if (resinActive && organicEdge) return "river";
+  // Qualunque resina attiva produce un "river table" (due lastre e un
+  // canale) — anche con bordo Regolare: nella realtà il bordo esterno di
+  // un river table è spesso tagliato pulito, mentre è il canale interno
+  // (che segue una crepa naturale) ad avere sempre un profilo organico,
+  // indipendente dalla finitura del bordo esterno.
+  if (resinActive) return "river";
   return "planked";
 }
 
@@ -179,6 +184,12 @@ function buildRiverComposition(params: TableGeometryParams): TableComposition {
   const hw = (widthCm * CM_TO_M) / 2;
   const segments = 24;
   const baseChannelHalf = Math.max(0.05, hl * 0.06);
+  // Il CANALE centrale segue sempre una crepa naturale (organico per
+  // definizione, indipendente dal bordo scelto). Il bordo ESTERNO delle due
+  // lastre invece deve rispettare davvero la scelta dell'utente: con
+  // "Regolare" dev'essere un taglio pulito, non ondulato — v. bug "River
+  // table con bordo Regolare risultava comunque ondulato".
+  const outerOrganic = edgeId === "vivo" || edgeId === "mosso";
 
   const ys: number[] = [];
   const centerXs: number[] = [];
@@ -193,7 +204,7 @@ function buildRiverComposition(params: TableGeometryParams): TableComposition {
     const wobbleSeed = seed * 1.3;
     const centerX = Math.sin(yNorm * 3.1 + wobbleSeed) * hl * 0.05 + Math.sin(yNorm * 7.3 - wobbleSeed) * hl * 0.02;
     const channelHalf = baseChannelHalf * (0.65 + 0.45 * Math.pow(Math.sin(yNorm * 2.3 + wobbleSeed * 1.7), 2));
-    const envHalfLen = envelopeHalfLength(shapeId, yNorm, hl, seed, true);
+    const envHalfLen = envelopeHalfLength(shapeId, yNorm, hl, seed, outerOrganic);
     const edgeJ = outerEdgeJitter(edgeId, rand);
 
     ys.push(y);

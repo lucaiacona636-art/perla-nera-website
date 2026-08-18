@@ -35,6 +35,6 @@ export const bases: BaseOption[] = [
     order: 4,
     category: "custom",
     description: "Disegnata insieme a te — descrivila nelle note del progetto.",
-    material: { type: "flat-color", baseColor: "#00000000" },
+    material: { type: "pbr", baseColor: "#5C5347", roughness: 0.5 },
   },
 ];

@@ -32,7 +32,7 @@ export function MaterialShowcase3D() {
           edgeId: "vivo",
           resin: { active: true, baseColor: resinaNera.material.baseColor, transparent: false, roughness: resinaNera.material.roughness ?? 0.15 },
           finishRoughness: 0.5,
-          base: { baseColor: baseAcciaio.material.baseColor, roughness: baseAcciaio.material.roughness ?? 0.4, category: "acciaio" },
+          base: { baseColor: baseAcciaio.material.baseColor, roughness: baseAcciaio.material.roughness ?? 0.4, category: "acciaio", id: baseAcciaio.id },
         }}
         fallback={
           <div

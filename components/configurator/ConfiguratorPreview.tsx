@@ -71,6 +71,7 @@ export function ConfiguratorPreview() {
           baseColor: base.material.baseColor,
           roughness: base.material.roughness ?? 0.4,
           category: base.category,
+          id: base.id,
         },
         autoRotate: false,
       }}

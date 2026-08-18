@@ -16,7 +16,7 @@ export interface Table3DProps {
   edgeId: string;
   resin: { active: boolean; baseColor: string; transparent: boolean; roughness: number };
   finishRoughness: number;
-  base: { baseColor: string; roughness: number; category: "acciaio" | "legno" | "custom" };
+  base: { baseColor: string; roughness: number; category: "acciaio" | "legno" | "custom"; id?: string };
   autoRotate?: boolean;
   /** Rif. mutabile 0→1 aggiornato da GSAP ScrollTrigger (Documento 8): se
    * presente, la rotazione segue lo scroll invece di ruotare in autonomia —
@@ -116,6 +116,29 @@ export function Table3D({
     [-legX, 0, legZ],
   ];
 
+  // La struttura (gambe/base) deve cambiare davvero forma, non solo colore:
+  // "Acciaio nero" → telaio a croce per lato (come una slitta/hairpin);
+  // "Acciaio naturale" → quattro tondini sottili;
+  // "Legno a cavalletto" → quattro gambe in legno unite da una traversa per
+  // lato, come un vero cavalletto; "Base custom" → gambe squadrate semplici,
+  // in attesa del disegno definitivo concordato col cliente.
+  const structure: "cross" | "rods" | "trestle" | "block" =
+    base.id === "acciaio-nero"
+      ? "cross"
+      : base.id === "acciaio-naturale"
+        ? "rods"
+        : base.id === "legno-cavalletto"
+          ? "trestle"
+          : base.category === "acciaio"
+            ? "rods"
+            : "block";
+
+  const barThickness = Math.max(0.022, legRadius * 1.3);
+  const crossbarHeight = Math.max(0.035, legRadius * 2.2);
+  const crossBarLength = Math.sqrt(legHeight * legHeight + (2 * legZ) * (2 * legZ));
+  const crossBarAngle = Math.atan2(2 * legZ, legHeight);
+  const trestleSplay = 0.12; // ~7°: gambe leggermente svasate, sagoma da vero cavalletto
+
   return (
     <group ref={groupRef}>
       <group position={[0, tableTopY, 0]}>
@@ -157,16 +180,60 @@ export function Table3D({
           ))}
       </group>
 
-      {legPositions.map((pos, i) => (
-        <mesh key={i} position={[pos[0], legHeight / 2, pos[2]]} castShadow>
-          {base.category === "acciaio" ? (
-            <cylinderGeometry args={[legRadius * 0.7, legRadius * 0.7, legHeight, 16]} />
-          ) : (
+      {structure === "cross" &&
+        [-legX, legX].map((x, endIdx) => (
+          <group key={endIdx}>
+            <mesh position={[x, legHeight / 2, 0]} rotation={[crossBarAngle, 0, 0]} castShadow>
+              <boxGeometry args={[barThickness, crossBarLength, barThickness]} />
+              <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={0.75} />
+            </mesh>
+            <mesh position={[x, legHeight / 2, 0]} rotation={[-crossBarAngle, 0, 0]} castShadow>
+              <boxGeometry args={[barThickness, crossBarLength, barThickness]} />
+              <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={0.75} />
+            </mesh>
+          </group>
+        ))}
+
+      {structure === "rods" &&
+        legPositions.map((pos, i) => (
+          <mesh key={i} position={[pos[0], legHeight / 2, pos[2]]} castShadow>
+            <cylinderGeometry args={[legRadius * 0.55, legRadius * 0.55, legHeight, 16]} />
+            <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={0.7} />
+          </mesh>
+        ))}
+
+      {structure === "trestle" && (
+        <>
+          {legPositions.map((pos, i) => (
+            <mesh
+              key={i}
+              position={[pos[0], legHeight / 2, pos[2]]}
+              rotation={[pos[2] < 0 ? trestleSplay : -trestleSplay, 0, 0]}
+              castShadow
+            >
+              <boxGeometry args={[legRadius * 2, legHeight, legRadius * 2]} />
+              <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={0.05} />
+            </mesh>
+          ))}
+          {/* Traversa orizzontale per lato, leggermente più larga del piano
+              alle estremità — la sagoma che rende riconoscibile un vero
+              cavalletto, non solo quattro gambe dritte. */}
+          {[-legX, legX].map((x, endIdx) => (
+            <mesh key={endIdx} position={[x, legHeight * 0.88, 0]} castShadow>
+              <boxGeometry args={[barThickness, crossbarHeight, 2 * legZ + 0.05]} />
+              <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={0.05} />
+            </mesh>
+          ))}
+        </>
+      )}
+
+      {structure === "block" &&
+        legPositions.map((pos, i) => (
+          <mesh key={i} position={[pos[0], legHeight / 2, pos[2]]} castShadow>
             <boxGeometry args={[legRadius * 2, legHeight, legRadius * 2]} />
-          )}
-          <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={base.category === "acciaio" ? 0.7 : 0.05} />
-        </mesh>
-      ))}
+            <meshStandardMaterial color={base.baseColor} roughness={base.roughness} metalness={0.05} />
+          </mesh>
+        ))}
     </group>
   );
 }

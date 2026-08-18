@@ -61,6 +61,17 @@ export function Configurator() {
     }
   }, [store.screen, store.categoryId, hydrated]);
 
+  // Su mobile/tablet ogni step può richiedere scroll per essere letto per
+  // intero: senza reset, avanzando allo step successivo la pagina resta
+  // alla posizione di scroll precedente e il titolo/le prime opzioni del
+  // nuovo step restano nascoste sotto l'header fisso — bug osservato a
+  // 768px, dove il pulsante "Rettangolare" risultava parzialmente sotto
+  // l'header subito dopo "Continua".
+  useEffect(() => {
+    if (!hydrated) return;
+    window.scrollTo(0, 0);
+  }, [store.screen, hydrated]);
+
   if (!hydrated) return <div className="min-h-[70vh] surface-light" />;
 
   const canContinue = (() => {
