@@ -25,7 +25,7 @@ export function MaterialShowcase3D() {
         interactive
         className="h-full w-full"
         table={{
-          essence: { baseColor: noce.material.baseColor, grainSeed: noce.material.grainSeed ?? 1, roughness: noce.material.roughness ?? 0.55 },
+          essence: { baseColor: noce.material.baseColor, grainSeed: noce.material.grainSeed ?? 1, roughness: noce.material.roughness ?? 0.55, essenceId: noce.id },
           shapeId: "rectangular",
           lengthCm: 220,
           widthCm: 100,

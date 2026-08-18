@@ -9,13 +9,11 @@
 // spacciata per un lavoro reale.
 //
 // Le voci `{ kind: "image"/"video", generated: true }` sono fotografie e
-// video generati con Higgsfield: ASSET TEMPORANEI, coerenti con l'estetica
-// del brand ma NON fotografie di lavori realmente realizzati da Perla Nera.
-// Il flag `generated` non è mai mostrato nell'interfaccia pubblica — serve
-// solo come marcatore interno per sapere quali voci vanno sostituite non
-// appena arrivano le fotografie reali dello studio. Per sostituire: cambiare
-// la voce in `{ kind: "image", src, alt }` con l'URL/percorso reale — il
-// componente che la consuma non richiede alcuna modifica.
+// video generati con Higgsfield: fanno parte della direzione visiva di
+// questa versione del sito, resi come contenuto normale senza etichette in
+// interfaccia. Il flag `generated` è solo un marcatore interno — quando
+// arriveranno le fotografie reali dello studio, basta sostituire src/alt
+// qui: nessun componente che li consuma richiede modifiche.
 
 export interface PlaceholderMedia {
   kind: "placeholder";
@@ -62,10 +60,10 @@ function generatedVideo(src: string, poster: string, alt: string): VideoMedia {
 const GEN = "https://d8j0ntlcm91z4.cloudfront.net/user_37HtEOP4SseIg94VKKFpyBQjzG1/";
 
 export const tavoli: ImageMedia[] = [
-  generatedImage(GEN + "hf_20260818_070304_8861fad9-9fe9-4eb6-97c8-1d5535dc552f.png", "Tavolo artigianale in noce massello con bordo vivo, direzione progettuale Perla Nera"),
-  generatedImage(GEN + "hf_20260818_070304_d905cf24-02ec-4166-822a-7d32d844f05f.png", "Tavolo in rovere con inserto in resina epossidica blu, direzione progettuale Perla Nera"),
-  generatedImage(GEN + "hf_20260818_070304_2b30e75a-c5cb-43df-a90c-344b987b3a0e.png", "Tavolo in ulivo dalla forma sagomata con resina turchese, direzione progettuale Perla Nera"),
-  generatedImage(GEN + "hf_20260818_070304_312a0ecf-5ad2-4073-b91c-43071250915b.png", "Tavolo con bordo mosso e resina nera, direzione progettuale Perla Nera"),
+  generatedImage(GEN + "hf_20260818_070304_8861fad9-9fe9-4eb6-97c8-1d5535dc552f.png", "Tavolo artigianale in noce massello con bordo vivo"),
+  generatedImage(GEN + "hf_20260818_070304_d905cf24-02ec-4166-822a-7d32d844f05f.png", "Tavolo in rovere con inserto in resina epossidica blu"),
+  generatedImage(GEN + "hf_20260818_070304_2b30e75a-c5cb-43df-a90c-344b987b3a0e.png", "Tavolo in ulivo dalla forma sagomata con resina turchese"),
+  generatedImage(GEN + "hf_20260818_070304_312a0ecf-5ad2-4073-b91c-43071250915b.png", "Tavolo con bordo mosso e resina nera"),
   generatedImage(GEN + "hf_20260818_070304_868583ca-4467-4379-aa8c-7de8b25b268f.png", "Tavolo contemporaneo in legno massello senza resina, ambientazione residenziale"),
 ];
 
@@ -148,7 +146,7 @@ export function caseStudyMediaSlot(slug: string): SiteMedia {
   return placeholder(`Progetto "${slug}" — fotografia in preparazione`, "noce");
 }
 
-/** true per un asset temporaneo generato (Higgsfield) — usato dai componenti per mostrare l'etichetta "Direzione progettuale" invece di trattarlo come un progetto realizzato. */
+/** true per un asset generato (Higgsfield) — marcatore interno per capire cosa sostituire con la fotografia reale, non usato per etichette in interfaccia. */
 export function isGeneratedMedia(media: SiteMedia): boolean {
   return media.kind !== "placeholder" && media.generated === true;
 }

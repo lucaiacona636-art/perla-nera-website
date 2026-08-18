@@ -30,10 +30,10 @@ const tavoliSteps: StepDef[] = [
   { id: "essenza", title: "Scegli il legno", subtitle: "L'essenza determina venatura, durezza e carattere del pezzo.", required: true },
   { id: "forma", title: "Scegli la forma", required: true },
   { id: "dimensioni", title: "Definisci le misure", required: true },
-  { id: "bordo", title: "Scegli il bordo", subtitle: "Decido dopo se non sei ancora sicuro.", required: false },
-  { id: "resina", title: "Scegli la resina", subtitle: "Decido dopo se non sei ancora sicuro.", required: false },
-  { id: "finitura", title: "Scegli la finitura", subtitle: "Decido dopo se non sei ancora sicuro.", required: false },
-  { id: "base", title: "Scegli la base", subtitle: "Decido dopo se non sei ancora sicuro.", required: false },
+  { id: "bordo", title: "Scegli il bordo", subtitle: "Il bordo definisce il carattere del tavolo.", required: false },
+  { id: "resina", title: "Scegli la resina", subtitle: "Dalla trasparenza al contrasto deciso: la resina diventa parte della composizione.", required: false },
+  { id: "finitura", title: "Scegli la finitura", subtitle: "La finitura decide come la luce incontra il legno.", required: false },
+  { id: "base", title: "Scegli la base", subtitle: "La base completa la composizione, in equilibrio con il piano.", required: false },
 ];
 
 const freeBriefSteps: StepDef[] = [
@@ -112,12 +112,7 @@ export function Configurator() {
                 onClick={() => handleSelectCategory(category.id)}
                 className="group text-left border border-line-dark bg-ink-2 p-6 transition-colors hover:border-bronze-hi"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <p className="font-display text-xl">{category.label}</p>
-                  {category.status === "coming-soon" && (
-                    <span className="eyebrow shrink-0 text-[10px] text-text-dark-muted">In arrivo</span>
-                  )}
-                </div>
+                <p className="font-display text-xl">{category.label}</p>
                 <p className="mt-3 text-sm text-text-dark-muted">{category.shortDescription}</p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-text-dark border-b border-bronze-hi pb-0.5 group-hover:gap-3 transition-all">
                   Inizia →
@@ -173,7 +168,12 @@ export function Configurator() {
               {currentStepDef?.id === "dimensioni" && (
                 (() => {
                   const shape = shapes.find((s) => s.id === store.shapeId) ?? shapes[0]!;
-                  const dims = store.dimensions ?? { length: shape.dimensionRules.length.default, width: shape.dimensionRules.width.default };
+                  const heightRule = shape.dimensionRules.height ?? { min: 70, max: 78, default: 75, step: 1 };
+                  const dims = store.dimensions ?? {
+                    length: shape.dimensionRules.length.default,
+                    width: shape.dimensionRules.width.default,
+                    height: heightRule.default,
+                  };
                   return (
                     <div className="space-y-8">
                       <DimensionSlider
@@ -187,6 +187,12 @@ export function Configurator() {
                         rule={shape.dimensionRules.width}
                         value={dims.width}
                         onChange={(v) => store.setDimensions({ ...dims, width: v })}
+                      />
+                      <DimensionSlider
+                        label="Altezza"
+                        rule={heightRule}
+                        value={dims.height}
+                        onChange={(v) => store.setDimensions({ ...dims, height: v })}
                       />
                       <p className="text-xs text-text-light-muted">
                         Misure speciali? Puoi indicarle nelle note del riepilogo finale.

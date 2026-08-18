@@ -38,7 +38,11 @@ export function ConfiguratorPreview() {
   const resin = resins.find((r) => r.id === resinId) ?? resins[0]!;
   const finish = finishes.find((f) => f.id === finishId) ?? finishes[0]!;
   const base = bases.find((b) => b.id === baseId) ?? bases[0]!;
-  const dims = dimensions ?? { length: shape.dimensionRules.length.default, width: shape.dimensionRules.width.default };
+  const dims = dimensions ?? {
+    length: shape.dimensionRules.length.default,
+    width: shape.dimensionRules.width.default,
+    height: shape.dimensionRules.height?.default ?? 75,
+  };
 
   return (
     <TableScene
@@ -49,10 +53,12 @@ export function ConfiguratorPreview() {
           baseColor: essence.material.baseColor,
           grainSeed: essence.material.grainSeed ?? 1,
           roughness: essence.material.roughness ?? 0.55,
+          essenceId: essence.id,
         },
         shapeId: shape.geometryId,
         lengthCm: dims.length,
         widthCm: dims.width,
+        heightCm: dims.height,
         edgeId: edge.id,
         resin: {
           active: resin.id !== "nessuna",
@@ -74,7 +80,7 @@ export function ConfiguratorPreview() {
             <WoodSwatch baseColor={essence.material.baseColor} seed={essence.material.grainSeed ?? 1} />
           </div>
           <p className="text-center text-sm text-text-light-muted">
-            {essence.label} · {shape.label} · {dims.length}&times;{dims.width}cm
+            {essence.label} · {shape.label} · {dims.length}&times;{dims.width}&times;{dims.height}cm
           </p>
         </div>
       }

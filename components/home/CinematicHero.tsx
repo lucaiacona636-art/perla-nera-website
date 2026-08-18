@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { WoodSwatch } from "@/components/ui/WoodSwatch";
 import { cn } from "@/lib/utils";
-import { isGeneratedMedia, media, type SiteMedia } from "@/content/media";
+import { media, type SiteMedia } from "@/content/media";
 import { essences } from "@/content/configurator/essences";
 
 // Cinematic Hero — apertura narrativa della Home (Documento 8 §1 esteso).
@@ -35,24 +35,17 @@ function HeroMediaFill({ media: heroMedia }: { media: SiteMedia }) {
 
   if (heroMedia.kind === "video") {
     return (
-      <>
-        <video
-          src={heroMedia.src}
-          poster={heroMedia.poster}
-          aria-label={heroMedia.alt}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        {isGeneratedMedia(heroMedia) && (
-          <span className="absolute bottom-4 left-4 hidden font-mono text-[10px] uppercase tracking-[0.08em] text-text-dark-muted/80 sm:block">
-            Direzione progettuale — video temporaneo
-          </span>
-        )}
-      </>
+      <video
+        src={heroMedia.src}
+        poster={heroMedia.poster}
+        aria-label={heroMedia.alt}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
     );
   }
 

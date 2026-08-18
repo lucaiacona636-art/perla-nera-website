@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const creazioni = [
-  { title: "Tavoli e tavolini", body: "La categoria più matura dello studio, oggi interamente configurabile.", href: "/collezione" },
+  { title: "Tavoli e tavolini", body: "Configurabili passo dopo passo: essenza, forma, resina, finitura, base.", href: "/collezione" },
   { title: "Complementi d'arredo", body: "Panche, consolle, credenze, specchi: lo stesso linguaggio materico, altre funzioni.", href: "/progetta" },
   { title: "Sculture e opere", body: "Pezzi dove la materia è il soggetto, non il supporto di una funzione.", href: "/sculture-e-opere" },
   { title: "Oggetti e pezzi unici", body: "Formati piccoli, tirature di uno, senza compromessi sulla cura.", href: "/progetta" },

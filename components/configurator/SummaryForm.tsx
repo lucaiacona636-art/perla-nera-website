@@ -26,23 +26,33 @@ function buildTavoliSummary(store: ReturnType<typeof useConfiguratorStore.getSta
   const finish = finishes.find((f) => f.id === store.finishId);
   const base = bases.find((b) => b.id === store.baseId);
 
+  const dimensionsLabel = store.dimensions
+    ? `${store.dimensions.length} × ${store.dimensions.width} × ${store.dimensions.height} cm`
+    : undefined;
+
   const rows = [
     { label: "Essenza", value: essence?.label },
     { label: "Forma", value: shape?.label },
-    { label: "Dimensioni", value: store.dimensions ? `${store.dimensions.length} × ${store.dimensions.width} cm` : undefined },
+    { label: "Dimensioni", value: dimensionsLabel },
     { label: "Bordo", value: edge?.label ?? "Da definire insieme" },
     { label: "Resina", value: resin?.label ?? "Da definire insieme" },
     { label: "Finitura", value: finish?.label ?? "Da definire insieme" },
     { label: "Base", value: base?.label ?? "Da definire insieme" },
   ];
 
-  const edgeLabel = edge ? (edge.label.toLowerCase().startsWith("bordo") ? edge.label.toLowerCase() : `bordo ${edge.label.toLowerCase()}`) : "bordo da definire";
-
-  const text = `Tavolo ${shape?.label?.toLowerCase() ?? ""} in ${essence?.label?.toLowerCase() ?? "essenza da definire"}, ${
-    store.dimensions ? `${store.dimensions.length}×${store.dimensions.width}cm` : "dimensioni da definire"
-  }, ${edgeLabel}, resina ${resin?.label?.toLowerCase() ?? "da definire"}, finitura ${
-    finish?.label?.toLowerCase() ?? "da definire"
-  }, base ${base?.label?.toLowerCase() ?? "da definire"}.`;
+  const text = [
+    "Ho configurato un tavolo Perla Nera:",
+    "",
+    `Essenza: ${essence?.label ?? "Da definire"}`,
+    `Forma: ${shape?.label ?? "Da definire"}`,
+    `Dimensioni: ${dimensionsLabel ?? "Da definire"}`,
+    `Bordo: ${edge?.label ?? "Da definire"}`,
+    `Resina: ${resin?.label ?? "Da definire"}`,
+    `Finitura: ${finish?.label ?? "Da definire"}`,
+    `Base: ${base?.label ?? "Da definire"}`,
+    "",
+    "Vorrei ricevere maggiori informazioni.",
+  ].join("\n");
 
   return { rows, text };
 }
@@ -199,7 +209,7 @@ export function SummaryForm() {
           )}
 
           <Button type="submit" className={cn(status === "submitting" && "pointer-events-none opacity-60")}>
-            {status === "submitting" ? "Invio in corso…" : "Richiedi il tuo progetto"}
+            {status === "submitting" ? "Invio in corso…" : "Richiedi questo progetto"}
           </Button>
         </form>
       </div>

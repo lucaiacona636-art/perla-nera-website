@@ -12,6 +12,7 @@ export const shapes: ShapeOption[] = [
     dimensionRules: {
       length: { min: 120, max: 320, default: 220, step: 5 },
       width: { min: 70, max: 130, default: 100, step: 5 },
+      height: { min: 70, max: 78, default: 75, step: 1 },
     },
   },
   {
@@ -25,6 +26,7 @@ export const shapes: ShapeOption[] = [
     dimensionRules: {
       length: { min: 160, max: 320, default: 220, step: 5 },
       width: { min: 90, max: 130, default: 110, step: 5 },
+      height: { min: 70, max: 78, default: 75, step: 1 },
     },
   },
   {
@@ -38,6 +40,7 @@ export const shapes: ShapeOption[] = [
     dimensionRules: {
       length: { min: 140, max: 300, default: 210, step: 5 },
       width: { min: 70, max: 140, default: 95, step: 5 },
+      height: { min: 70, max: 78, default: 75, step: 1 },
     },
   },
 ];

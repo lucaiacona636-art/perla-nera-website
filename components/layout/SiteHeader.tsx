@@ -96,9 +96,6 @@ export function SiteHeader() {
                           className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-text-dark hover:bg-ink-2 transition-colors"
                         >
                           {c.label}
-                          {c.status === "coming-soon" && (
-                            <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-text-dark-muted">In arrivo</span>
-                          )}
                         </Link>
                       ))}
                     <div className="mt-1 border-t border-line-dark pt-2">

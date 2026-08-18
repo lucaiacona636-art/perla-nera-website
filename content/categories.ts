@@ -11,7 +11,7 @@ export const categories: ProductCategory[] = [
     status: "available",
     schemaId: "schema-tavoli",
     shortDescription:
-      "Essenza, forma, bordo, resina, finitura e base: la categoria più matura dello studio, oggi interamente configurabile.",
+      "Essenza, forma, bordo, resina, finitura e base: progetta il tuo tavolo passo dopo passo, con anteprima in tempo reale.",
   },
   {
     id: "complementi-arredo",

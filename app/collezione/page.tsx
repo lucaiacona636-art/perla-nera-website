@@ -17,8 +17,7 @@ export const metadata: Metadata = {
 
 // Interpretazioni della categoria Tavoli, non progetti consegnati — nessun
 // cliente/luogo reale finché non ci sono case study veri (v. Documento 1
-// §3, content/case-studies.ts). Il badge "Direzione progettuale" su ogni
-// card lo rende esplicito anche visivamente (v. MediaSlot).
+// §3, content/case-studies.ts).
 const tavoliProjects = [
   { title: "Tavolo ovale in noce", place: "Bordo vivo, resina nera", tags: ["Noce", "Resina nera", "Bordo vivo"], media: tavoli[0]! },
   { title: "Tavolo rettangolare in rovere", place: "Resina epossidica blu", tags: ["Rovere", "Resina blu"], media: tavoli[1]! },
@@ -45,8 +44,9 @@ export default function CollezionePage() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 max-w-[58ch] text-lg text-text-dark-muted sm:text-xl">
-              Sfoglia per categoria. Tavoli è oggi la più matura — le altre
-              crescono con lo stesso metodo, un progetto alla volta.
+              Sfoglia per categoria: tavoli, complementi, sculture, pezzi
+              unici. Ogni progetto nasce da una conversazione, non da un
+              catalogo.
             </p>
           </Reveal>
         </div>
@@ -61,12 +61,7 @@ export default function CollezionePage() {
                 href={category.status === "available" ? "#tavoli" : getCategoryHref(category)}
                 className="group block h-full border border-line-light bg-ivory-2 p-6 transition-colors hover:border-bronze"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl">{category.label}</h3>
-                  {category.status === "coming-soon" && (
-                    <span className="eyebrow shrink-0 text-[10px] text-text-light-muted">In arrivo</span>
-                  )}
-                </div>
+                <h3 className="text-xl">{category.label}</h3>
                 <p className="mt-3 text-sm text-text-light-muted">{category.shortDescription}</p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-text-light border-b border-bronze pb-0.5 group-hover:gap-3 transition-all">
                   {category.status === "available" ? "Sfoglia i progetti" : category.id === "pezzi-scultorei" ? "Scopri Sculture & Opere" : "Raccontaci cosa hai in mente"} →
@@ -101,12 +96,6 @@ export default function CollezionePage() {
           ))}
         </div>
 
-        <Reveal delay={0.2}>
-          <p className="mt-8 max-w-[52ch] text-sm text-text-light-muted">
-            Direzioni progettuali generate temporaneamente, in attesa della
-            fotografia reale di ogni progetto.
-          </p>
-        </Reveal>
       </Section>
 
       {/* ---------------- CTA FINALE ---------------- */}

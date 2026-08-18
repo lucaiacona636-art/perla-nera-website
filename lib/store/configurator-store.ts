@@ -11,7 +11,7 @@ interface ConfiguratorState {
   screen: number; // 0 = selezione categoria; poi step della categoria; ultimo = riepilogo
   essenceId: string | null;
   shapeId: string | null;
-  dimensions: { length: number; width: number } | null;
+  dimensions: { length: number; width: number; height: number } | null;
   edgeId: string | null;
   resinId: string | null;
   finishId: string | null;
@@ -25,7 +25,7 @@ interface ConfiguratorState {
   back: () => void;
   setEssence: (id: string) => void;
   setShape: (id: string) => void;
-  setDimensions: (dims: { length: number; width: number }) => void;
+  setDimensions: (dims: { length: number; width: number; height: number }) => void;
   setEdge: (id: string) => void;
   setResin: (id: string) => void;
   setFinish: (id: string) => void;
@@ -61,7 +61,16 @@ export const useConfiguratorStore = create<ConfiguratorState>()(
             categoryId: id,
             screen: 1,
             shapeId: isTavoli ? s.shapeId ?? defaultShape?.id ?? null : s.shapeId,
-            dimensions: isTavoli ? s.dimensions ?? (defaultShape ? { length: defaultShape.dimensionRules.length.default, width: defaultShape.dimensionRules.width.default } : null) : s.dimensions,
+            dimensions: isTavoli
+              ? s.dimensions ??
+                (defaultShape
+                  ? {
+                      length: defaultShape.dimensionRules.length.default,
+                      width: defaultShape.dimensionRules.width.default,
+                      height: defaultShape.dimensionRules.height?.default ?? 75,
+                    }
+                  : null)
+              : s.dimensions,
             updatedAt: Date.now(),
           };
         }),
@@ -76,7 +85,11 @@ export const useConfiguratorStore = create<ConfiguratorState>()(
           return {
             shapeId: id,
             dimensions: shape
-              ? { length: shape.dimensionRules.length.default, width: shape.dimensionRules.width.default }
+              ? {
+                  length: shape.dimensionRules.length.default,
+                  width: shape.dimensionRules.width.default,
+                  height: shape.dimensionRules.height?.default ?? 75,
+                }
               : null,
             updatedAt: Date.now(),
           };

@@ -8,6 +8,7 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 import { TrackedLink } from "@/components/ui/TrackedLink";
 import { CinematicHero } from "@/components/home/CinematicHero";
 import { MaterialShowcase3D } from "@/components/home/MaterialShowcase3D";
+import { ConfiguratorShowcase3D } from "@/components/home/ConfiguratorShowcase3D";
 import { categories, getCategoryHref } from "@/content/categories";
 import { essences } from "@/content/configurator/essences";
 import { business } from "@/content/business";
@@ -70,12 +71,7 @@ export default function HomePage() {
                 href={getCategoryHref(category)}
                 className="group block h-full border border-line-light bg-ivory-2 p-6 transition-colors hover:border-bronze"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl">{category.label}</h3>
-                  {category.status === "coming-soon" && (
-                    <span className="eyebrow shrink-0 text-[10px] text-text-light-muted">In arrivo</span>
-                  )}
-                </div>
+                <h3 className="text-xl">{category.label}</h3>
                 <p className="mt-3 text-sm text-text-light-muted">{category.shortDescription}</p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-text-light border-b border-bronze pb-0.5 group-hover:gap-3 transition-all">
                   {category.status === "available" ? "Scopri la collezione" : category.id === "pezzi-scultorei" ? "Scopri Sculture & Opere" : "Raccontaci cosa hai in mente"} →
@@ -127,12 +123,6 @@ export default function HomePage() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.26}>
-          <p className="mt-8 max-w-[56ch] text-sm text-text-dark-muted">
-            Venature generate come riferimento visivo, in attesa della fotografia
-            reale di ogni essenza — l&rsquo;architettura è pronta a sostituirle 1:1.
-          </p>
-        </Reveal>
       </Section>
 
       {/* ---------------- 6. PROGETTI REALI / CASE STUDY ---------------- */}
@@ -162,13 +152,6 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
-        <Reveal delay={0.2}>
-          <p className="mt-8 max-w-[56ch] text-sm text-text-light-muted">
-            Direzioni progettuali generate temporaneamente, in attesa della
-            fotografia reale di ogni progetto — Tavoli è oggi la categoria
-            più matura, le altre crescono con lo stesso metodo.
-          </p>
-        </Reveal>
       </Section>
 
       {/* ---------------- 7. PROCESSO ARTIGIANALE ---------------- */}
@@ -215,43 +198,30 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ---------------- 8. CONFIGURATORE — "PROGETTA IL TUO PEZZO" ---------------- */}
+      {/* ---------------- 8. CONFIGURATORE — "PROGETTA IL TUO TAVOLO" ---------------- */}
       <Section surface="light">
         <div className="grid gap-9 lg:grid-cols-2 lg:items-center">
           <div>
             <Reveal>
-              <span className="eyebrow text-text-light-muted">Progetta il tuo pezzo</span>
+              <span className="eyebrow text-text-light-muted">Configuratore</span>
             </Reveal>
             <Reveal delay={0.06}>
-              <h2 className="mt-5 max-w-[18ch]">Scegli l&rsquo;essenza. Guarda il tuo progetto prendere forma.</h2>
+              <h2 className="mt-5 max-w-[18ch]">Progetta il tuo tavolo.</h2>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-6 max-w-[48ch] text-lg text-text-light-muted">
-                Scegli una categoria — un tavolo, un complemento, un pezzo fuori
-                catalogo — e guarda il tuo progetto prendere forma prima ancora di
-                richiederlo. Due minuti per trasformare un&rsquo;idea in un progetto.
+                Scegli essenza, forma, resina e dettagli. Guarda il tuo
+                progetto prendere forma.
               </p>
             </Reveal>
             <Reveal delay={0.18}>
               <div className="mt-8">
-                <Button href="/progetta">Progetta il tuo pezzo</Button>
+                <Button href="/progetta">Progetta il tuo tavolo</Button>
               </div>
             </Reveal>
           </div>
           <Reveal delay={0.1} className="order-first lg:order-last">
-            <div className="aspect-[4/3] border border-line-light bg-ivory-2 p-8 flex flex-col justify-between">
-              <span className="eyebrow text-text-light-muted">Anteprima — categoria Tavoli</span>
-              <div className="grid grid-cols-4 gap-3">
-                {essences.map((essence) => (
-                  <div key={essence.id} className="aspect-square overflow-hidden border border-line-light">
-                    <WoodSwatch baseColor={essence.material.baseColor} seed={essence.material.grainSeed ?? 1} />
-                  </div>
-                ))}
-              </div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-light-muted">
-                Essenza · Forma · Dimensioni · Bordo · Resina · Finitura · Base
-              </p>
-            </div>
+            <ConfiguratorShowcase3D />
           </Reveal>
         </div>
       </Section>

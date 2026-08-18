@@ -25,4 +25,12 @@ export const finishes: FinishOption[] = [
     description: "Leggera luminosità, via di mezzo tra opaca e lucida.",
     material: { type: "pbr", baseColor: "#00000000", roughness: 0.35 },
   },
+  {
+    id: "lucida",
+    label: "Lucida",
+    active: true,
+    order: 4,
+    description: "Massima brillantezza, riflessi netti: superficie a specchio.",
+    material: { type: "pbr", baseColor: "#00000000", roughness: 0.08 },
+  },
 ];
