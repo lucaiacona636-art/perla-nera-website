@@ -3,6 +3,8 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { MediaSlot } from "@/components/ui/MediaSlot";
+import { media } from "@/content/media";
 
 export const metadata: Metadata = {
   title: "Collaborazioni",
@@ -89,6 +91,19 @@ export default function CollaborazioniPage() {
                 identità coerenti tra i pezzi — la sfida tipica di un
                 ambiente che deve raccontare un&rsquo;unica storia in più punti.
               </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          <Reveal delay={0.12}>
+            <div className="aspect-[4/3] overflow-hidden">
+              <MediaSlot media={media.ambientazioni.generica} />
+            </div>
+          </Reveal>
+          <Reveal delay={0.18}>
+            <div className="aspect-[4/3] overflow-hidden">
+              <MediaSlot media={media.ambientazioni.hospitality} />
             </div>
           </Reveal>
         </div>

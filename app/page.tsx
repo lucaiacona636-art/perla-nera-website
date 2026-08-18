@@ -11,6 +11,8 @@ import { MaterialShowcase3D } from "@/components/home/MaterialShowcase3D";
 import { categories, getCategoryHref } from "@/content/categories";
 import { essences } from "@/content/configurator/essences";
 import { business } from "@/content/business";
+import { tavoli, sculture, complementi, media as mediaRegistry } from "@/content/media";
+import { MediaSlot } from "@/components/ui/MediaSlot";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -151,9 +153,9 @@ export default function HomePage() {
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { title: "Tavolo ovale in noce", place: "Villa privata — Affi (VR)", tags: ["Noce", "Resina nera"], gradientFrom: "from-wood-noce", category: "Tavoli" },
-            { title: "Scultura verticale in rovere", place: "Progetto privato — Verona", tags: ["Rovere", "Pezzo unico"], gradientFrom: "from-wood-rovere", category: "Sculture & Opere" },
-            { title: "Consolle in ulivo", place: "Progetto Lago di Garda", tags: ["Ulivo", "Resina trasparente"], gradientFrom: "from-wood-ulivo", category: "Complementi d'arredo" },
+            { title: "Tavolo ovale in noce", place: "Bordo vivo, resina nera", tags: ["Noce", "Resina nera"], media: tavoli[0]!, category: "Tavoli" },
+            { title: "Scultura verticale in rovere", place: "Pezzo unico", tags: ["Rovere", "Pezzo unico"], media: sculture[0]!, category: "Sculture & Opere" },
+            { title: "Consolle in ulivo", place: "Resina epossidica blu", tags: ["Ulivo", "Resina trasparente"], media: complementi[1]!, category: "Complementi d'arredo" },
           ].map((project, i) => (
             <Reveal key={project.title} delay={0.05 * i}>
               <ProjectCard {...project} />
@@ -162,7 +164,7 @@ export default function HomePage() {
         </div>
         <Reveal delay={0.2}>
           <p className="mt-8 max-w-[56ch] text-sm text-text-light-muted">
-            Immagini rappresentative del tipo di lavoro, in attesa della
+            Direzioni progettuali generate temporaneamente, in attesa della
             fotografia reale di ogni progetto — Tavoli è oggi la categoria
             più matura, le altre crescono con lo stesso metodo.
           </p>
@@ -180,7 +182,12 @@ export default function HomePage() {
               <h2 className="mt-5 max-w-[16ch]">Settimane di lavoro, non ore di produzione.</h2>
             </Reveal>
             <Reveal delay={0.12}>
-              <div className="mt-8">
+              <div className="mt-8 aspect-[4/3] overflow-hidden">
+                <MediaSlot media={mediaRegistry.processo.video} />
+              </div>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <div className="mt-6">
                 <Button href="/studio" variant="secondary">Scopri il processo</Button>
               </div>
             </Reveal>

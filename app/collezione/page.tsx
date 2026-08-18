@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { categories, getCategoryHref } from "@/content/categories";
+import { tavoli } from "@/content/media";
 
 export const metadata: Metadata = {
   title: "Collezione",
@@ -14,13 +15,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "/collezione" },
 };
 
+// Interpretazioni della categoria Tavoli, non progetti consegnati — nessun
+// cliente/luogo reale finché non ci sono case study veri (v. Documento 1
+// §3, content/case-studies.ts). Il badge "Direzione progettuale" su ogni
+// card lo rende esplicito anche visivamente (v. MediaSlot).
 const tavoliProjects = [
-  { title: "Tavolo ovale in noce", place: "Villa privata — Affi (VR)", tags: ["Noce", "Resina nera", "Bordo vivo"], gradientFrom: "from-wood-noce" },
-  { title: "Tavolo rettangolare in rovere", place: "Residenza privata — Verona", tags: ["Rovere", "Bordo vivo"], gradientFrom: "from-wood-rovere" },
-  { title: "Tavolo sagomato in ulivo", place: "Progetto Lago di Garda", tags: ["Ulivo", "Resina trasparente"], gradientFrom: "from-wood-ulivo" },
-  { title: "Tavolo rettangolare in olmo", place: "Residenza privata — Bardolino (VR)", tags: ["Olmo", "Finitura opaca"], gradientFrom: "from-wood-olmo" },
-  { title: "Tavolo ovale in noce", place: "Progetto Verona centro", tags: ["Noce", "Resina trasparente"], gradientFrom: "from-wood-noce" },
-  { title: "Tavolo sagomato in rovere", place: "Villa privata — Lazise (VR)", tags: ["Rovere", "Bordo mosso"], gradientFrom: "from-wood-rovere" },
+  { title: "Tavolo ovale in noce", place: "Bordo vivo, resina nera", tags: ["Noce", "Resina nera", "Bordo vivo"], media: tavoli[0]! },
+  { title: "Tavolo rettangolare in rovere", place: "Resina epossidica blu", tags: ["Rovere", "Resina blu"], media: tavoli[1]! },
+  { title: "Tavolo sagomato in ulivo", place: "Forma organica, resina turchese", tags: ["Ulivo", "Resina trasparente"], media: tavoli[2]! },
+  { title: "Tavolo bordo mosso", place: "Resina nera, finitura lucida", tags: ["Noce", "Bordo mosso"], media: tavoli[3]! },
+  { title: "Tavolo contemporaneo", place: "Legno massello, senza resina", tags: ["Rovere", "Finitura opaca"], media: tavoli[4]! },
+  { title: "Tavolo ovale in noce", place: "Bordo vivo, resina nera", tags: ["Noce", "Resina nera"], media: tavoli[0]! },
 ];
 
 export default function CollezionePage() {
@@ -98,8 +103,8 @@ export default function CollezionePage() {
 
         <Reveal delay={0.2}>
           <p className="mt-8 max-w-[52ch] text-sm text-text-light-muted">
-            Immagini rappresentative in attesa della fotografia reale di ogni
-            progetto — v. Documento 1, Fase 1b.
+            Direzioni progettuali generate temporaneamente, in attesa della
+            fotografia reale di ogni progetto.
           </p>
         </Reveal>
       </Section>

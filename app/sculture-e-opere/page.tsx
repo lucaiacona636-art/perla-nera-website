@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { MediaSlot } from "@/components/ui/MediaSlot";
+import { sculture, pezziUnici } from "@/content/media";
 
 export const metadata: Metadata = {
   title: "Sculture & Opere",
@@ -14,22 +16,22 @@ const direzioni = [
   {
     title: "Pezzi verticali",
     body: "Sculture da terra pensate per essere viste a 360°: il legno lavorato come massa, non come piano.",
-    gradient: "from-wood-noce via-ink-2 to-ink",
+    media: sculture[0]!,
   },
   {
     title: "Installazioni a parete",
     body: "Composizioni che occupano una superficie intera — resina e legno come rilievo, non come oggetto isolato.",
-    gradient: "from-wood-olmo via-ink-2 to-ink",
+    media: sculture[1]!,
   },
   {
     title: "Oggetti scultorei da interno",
     body: "Formato ridotto, stessa intensità: pezzi pensati per un tavolo, una libreria, un vuoto preciso.",
-    gradient: "from-wood-rovere via-ink-2 to-ink",
+    media: sculture[2]!,
   },
   {
     title: "Progetti site-specific",
     body: "Opere disegnate per uno spazio esatto — una hall, una vetrina, un giardino — non adattate dopo.",
-    gradient: "from-wood-ulivo via-ink-2 to-ink",
+    media: pezziUnici[0]!,
   },
 ];
 
@@ -91,7 +93,9 @@ export default function SculturaEOperePage() {
           <div key={item.title} className="border-b border-line-dark last:border-0">
             <div className="container-page grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
               <Reveal className={i % 2 === 1 ? "lg:order-2" : undefined}>
-                <div className={`aspect-[4/3] bg-gradient-to-br ${item.gradient}`} />
+                <div className="aspect-[4/3] overflow-hidden">
+                  <MediaSlot media={item.media} />
+                </div>
               </Reveal>
               <Reveal delay={0.1} className={i % 2 === 1 ? "lg:order-1" : undefined}>
                 <span className="eyebrow text-text-dark-muted">{`0${i + 1}`}</span>

@@ -3,6 +3,8 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { MediaSlot } from "@/components/ui/MediaSlot";
+import { media } from "@/content/media";
 
 export const metadata: Metadata = {
   title: "Studio",
@@ -128,7 +130,9 @@ export default function StudioPage() {
             </Reveal>
           </div>
           <Reveal delay={0.1}>
-            <div className="aspect-[4/3] border border-line-light bg-gradient-to-br from-wood-rovere via-ivory-2 to-wood-noce/40" />
+            <div className="aspect-[4/3] overflow-hidden border border-line-light">
+              <MediaSlot media={media.laboratorio.ambiente} />
+            </div>
           </Reveal>
         </div>
       </Section>
